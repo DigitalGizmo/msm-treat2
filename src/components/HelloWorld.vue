@@ -28,11 +28,25 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <h3>Test Environment Variable</h3>
+    <ul>
+      <li>global: {{ globalTest }}</li>
+<!--       <li>developer:  developer </li>
+      <li>node env: nodeEnv </li>
+ -->    </ul>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      globalTest: process.env.VUE_APP_SOMENAME
+      // developer: process.env.development.local.VUE_APP_DEVELOPER,
+      // nodeEnv: process.NODE_ENV
+      // testparam: 'voila'
+    }
+  },
   name: 'HelloWorld',
   props: {
     msg: String

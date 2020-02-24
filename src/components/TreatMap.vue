@@ -1,58 +1,65 @@
 <template>
 
-    <div class="map-wrapper">
-        <div>
-            <p>from props:  {{ entry.lat }}, {{ entry.lon }}, {{ entry.zoom_level }}, {{ entry.title }}</p>
-            <button
-                ref="testButton"
-                name="Donaldo"
-                @click="showLongText"
-                >
-                Toggle long popup
-            </button>
-            <button @click="showMap = !showMap">
-                Toggle map
-            </button>
-            <button @click="testMapRef(10)">Test map ref</button>
-            <button @click="customZoom(1)">Custom Zoom</button>
-        </div>
-        <section class="map-area">
-            <l-map
-                id="mapdiv"
-                v-if="showMap"
-                :zoom="zoom"
-                :center="initLocation"
-                :options="{  }"
-                :noBlockingAnimations="noBlocking"
-                name="Walter"
-                @update:center="centerUpdate"
-                @update:zoom="zoomUpdate"
-                ref="greenMap"
+  <div class="map-wrapper">
+    <section class="map-area">
+      <l-map
+        id="mapdiv"
+        :zoom="zoom"
+        :center="initLocation"
+        :options="{  }"
+        :noBlockingAnimations="noBlocking"
+        name="Walter"
+        ref="greenMap"
+      >
+        <l-tile-layer
+          :url="terrain"
+          :attribution="attribution"
+          :tms="true"
+        />
+        <l-tile-layer
+          v-if="showGreenleaf"
+          :url="greenleaf"
+          :attribution="attribution"
+          :tms="true"
+        />
+        <l-geo-json
+            :geojson="geojson"
+            :options="geoOptions"
+        />
+        <l-marker
+            v-for="(item, index) in entries"
+            :key="item.slug"
+            :lat-lng="latAndLng(item.lat, item.lon)"
+            @click="reSetEntry(index)"
             >
-                <l-tile-layer
-                    :url="greenleaf"
-                    :attribution="attribution"
-                    :tms="true"
-                />
-
-                <l-geo-json
-                    :geojson="geojson"
-                    :options="geoOptions"
-                />
-                <l-marker
-                    v-for="(item, index) in entries"
-                    :key="item.slug"
-                    :lat-lng="latAndLng(item.lat, item.lon)"
-                    @click="reSetEntry(index)"
-                    >
-                    <l-tooltip>Hello! {{ item.title }}</l-tooltip>
-                </l-marker>
-
-            </l-map>
-
-        </section>
-
-    </div>
+            <l-tooltip>Hello! {{ item.title }}</l-tooltip>
+        </l-marker>
+      </l-map>
+      </section>
+    <div class="map-layers-controls">
+      <!-- toggle greeleaf  -->
+      <input
+        type="radio"
+        id="one"
+        value=true
+        v-model="showGreenleaf"
+        v-bind:value="true"
+      />
+      <label for="one">Greenleaf/Treat</label>
+      <input
+        type="radio"
+        id="two"
+        value=false
+        v-model="showGreenleaf"
+        v-bind:value="false"
+      />
+      <label for="two">Terrain</label>
+      <!-- custom zoom -->
+      <p></p>
+      <span @click="customZoom(1)">In</span> |   
+      <span @click="customZoom(-1)">Out</span>    
+    </div> <!-- map layers controls -->
+  </div> <!-- map wrapper -->
 </template>
 
 <script>
@@ -92,7 +99,18 @@ export default {
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
+      terrain: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-'
+        + 'background/{z}/{x}/{y}.png',
       greenleaf: 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png',
+      path: '/assets/icons/',
+      initLocation: latLng(46.15, -68.76),
+      currentZoom: 11.5,
+      currentCenter: latLng(47.41322, -1.219482),
+      showParagraph: false,
+      mapOptions: {
+        zoomSnap: 0.5
+      },
+      showGreenleaf: true,
       geojson: {
         type: 'FeatureCollection',
         name: 'TreatPat-4326',
@@ -106,20 +124,7 @@ export default {
           { type: 'Feature', properties: { NAME: 'TreatPath6', LAYER: 'Trail', LENGTH: '97.559 km', BEARING: "214  49' 40.6\"", SINUOSITY: 1.3608642 }, geometry: { type: 'MultiLineString', coordinates: [[[-67.590711847055118, 46.135925920247722], [-67.571141440311024, 46.105812319964514], [-67.562479032709817, 46.091467269138185], [-67.556379940626954, 46.06553475582519], [-67.541448656053248, 46.050163429243561], [-67.529032884826336, 46.033040304505008], [-67.496582273311745, 46.015622632737156], [-67.500651238568921, 45.965695275464171], [-67.523274121223778, 45.9526254527836], [-67.540932927050036, 45.932332846029396], [-67.549753961230024, 45.923524189864473], [-67.594977409918059, 45.900937585320236], [-67.627734874980447, 45.869216431615975], [-67.651744437005959, 45.835556001289206], [-67.731894354344732, 45.834035813574367], [-67.755769414517559, 45.820953107084712], [-67.767111541199753, 45.809476793053996], [-67.759676584267694, 45.796830242552154], [-67.758544904371647, 45.779782319551693], [-67.762574594187512, 45.761805826819163], [-67.770287660253516, 45.750176329905415], [-67.79418985233734, 45.737948324358243], [-67.830322939483111, 45.678772625602846], [-67.837942692341969, 45.671658771030224], [-67.879290447024047, 45.657937866911993], [-67.90134843982689, 45.672895849374378], [-67.926073217330213, 45.67973278080531], [-67.940818767593811, 45.688184685635299], [-67.965664141778149, 45.698511696553176], [-67.991931973878636, 45.703379426406798], [-68.025779820951982, 45.697589917334945], [-68.04585929448298, 45.69070244755887], [-68.054663591196729, 45.684547917455994], [-68.060997007807003, 45.672970765515061], [-68.059848202072047, 45.657684846789287], [-68.072555853843895, 45.638961401808714], [-68.092571462057691, 45.637476884813502], [-68.106392651507633, 45.627805590092017], [-68.114161663207298, 45.611636188211584], [-68.116778652695913, 45.605331844914495], [-68.116814616873995, 45.603517493151465]]] } },
           { type: 'Feature', properties: { NAME: 'TreatPath7-end', LAYER: 'Trail', LENGTH: '24.929 km', BEARING: "240  28' 33.1\"", SINUOSITY: 1.1199741 }, geometry: { type: 'MultiLineString', coordinates: [[[-68.116778652695913, 45.605331844914495], [-68.125913377078092, 45.585516052770998], [-68.136300072859115, 45.565711627743632], [-68.157335163799061, 45.570670538637273], [-68.167401353270591, 45.56540999432081], [-68.201129417072366, 45.558792119135148], [-68.223628044072214, 45.553773582635252], [-68.248813549395379, 45.53970773176485], [-68.276194297728736, 45.539326737767283], [-68.30006724039427, 45.527968722220642], [-68.327719213974461, 45.514855092169277], [-68.361186620229091, 45.515498410178388], [-68.363781653990515, 45.508550546238673]]] } }
         ]
-      },
-      path: '/assets/icons/',
-      marker1: latLng(this.entry.lat + 0.5, this.entry.lon + 0.5),
-      marker2: latLng(this.entry.lat - 0.5, this.entry.lon - 0.5),
-      initLocation: latLng(46.15, -68.76),
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
-      currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
-      showParagraph: false,
-      mapOptions: {
-        zoomSnap: 0.5
-      },
-      showMap: true
+      }
     }
   },
   computed: {
@@ -148,32 +153,8 @@ export default {
       // return latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
       return latLng(pLat, pLng)
     },
-    zoomUpdate (zoom) {
-      this.currentZoom = zoom
-    },
-    centerUpdate (center) {
-      this.currentCenter = center
-    },
-    showLongText () {
-      this.showParagraph = !this.showParagraph
-    },
     innerClick () {
       alert('Click!')
-    },
-    testMapRef (zoomLevel) {
-      console.log('test button: ' + this.$refs.testButton.name)
-      // this.$nextTick(() => {
-      console.log(' map object: ' + this.$refs.greenMap.mapObject.name)
-      // });
-      // console.log(" map object: " + this.$refs["greenMap"].mapObject.name);
-      // this.$refs["greenMap"].mapObject.setZoom(6);
-      setTimeout(
-        // function(){
-        () => {
-          // alert("Hello");
-          this.$refs.greenMap.mapObject.setZoom(zoomLevel)
-        }, 1000
-      )
     }
   },
   mounted () {

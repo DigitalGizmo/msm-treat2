@@ -1,14 +1,15 @@
 <template>
     <div  class="wrapper">
-        <treat-map
-            :entry="entry"
-            :entries="entries"
-            :reSetEntry="setEntry"
-        ></treat-map>
-        <treat-panel
-            :entry="entry"
-            :incEntry="incrementEntry"
-        ></treat-panel>
+      <p>This could be a Maine State Museum banner</p>
+      <treat-map
+          :entry="entry"
+          :entries="entries"
+          :reSetEntry="setEntry"
+      ></treat-map>
+      <treat-panel
+          :entry="entry"
+          :incEntry="incrementEntry"
+      ></treat-panel>
     </div>
 </template>
 

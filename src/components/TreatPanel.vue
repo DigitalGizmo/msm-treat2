@@ -4,11 +4,14 @@
         <h2>Title: {{ entry.title }}</h2>
         <p>{{ entry.entry_date }}</p>
         <span v-html="entry.interpret_blurb"></span>
-        <button @click="incEntry('prev')">Decrement Entry</button>
-        <button @click="incEntry('next')">Increment Entry</button>
+        <p>
+          <span @click="incEntry('prev')">previous</span> |
+          <span v-if="nextExists" @click="incEntry('next')" >next</span>
+        </p>
 
         <div class="journal-image">
-            <img src="@/assets/logo.png">
+            <!-- <img src="@/assets/logo.png"> -->
+            <img :src="'images/small/' + entry.slug + '.jpg'">
 
         </div>
 
@@ -21,12 +24,21 @@
 
 <script>
 export default {
-  // props: ['entry']
+  data () {
+    return {
+      nextExists () {
+        return true; 
+      }
+    }
+  },
   props: {
     entry: {
       type: Object
     },
     incEntry: Function
+  },
+  computed: {
+
   }
 }
 // Could have method here that operat on prop as

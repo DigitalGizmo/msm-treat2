@@ -14,7 +14,7 @@
         <l-tile-layer
           :url="terrain"
           :attribution="attribution"
-          :tms="true"
+          :tms="false"
         />
         <l-tile-layer
           v-if="showGreenleaf"
@@ -41,7 +41,6 @@
       <input
         type="radio"
         id="one"
-        value=true
         v-model="showGreenleaf"
         v-bind:value="true"
       />
@@ -49,15 +48,14 @@
       <input
         type="radio"
         id="two"
-        value=false
         v-model="showGreenleaf"
         v-bind:value="false"
       />
       <label for="two">Terrain</label>
       <!-- custom zoom -->
       <p></p>
-      <span @click="customZoom(1)">In</span> |   
-      <span @click="customZoom(-1)">Out</span>    
+      <span @click="customZoom(1)">In</span> |
+      <span @click="customZoom(-1)">Out</span>
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
 </template>
@@ -99,8 +97,8 @@ export default {
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
-      terrain: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-'
-        + 'background/{z}/{x}/{y}.png',
+      terrain: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-' +
+        'background/{z}/{x}/{y}.png',
       greenleaf: 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png',
       path: '/assets/icons/',
       initLocation: latLng(46.15, -68.76),
@@ -180,5 +178,12 @@ export default {
 </script>
 
 <style>
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
 
 </style>

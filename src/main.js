@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueResource from 'vue-resource'
 import router from './router'
-
 // For Leaflet map:
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+
+Vue.use(VueResource)
 
 Vue.config.productionTip = false
 

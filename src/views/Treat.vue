@@ -10,12 +10,13 @@
       <treat-panel
           :entry="entry"
           :incEntry="incrementEntry"
-          :showFullEntry="showFullEntry"
+          :showLightBox="showLightBox"
       ></treat-panel>
     </div>
     <full-entry
       v-if="lightBoxOn"
         :entry="entry"
+        :closeLightBox="closeLightBox"
     ></full-entry>
   </div>
 </template>
@@ -64,8 +65,11 @@ export default {
       // Leaflet setView.
       eventBus.$emit('reSetView')
     },
-    showFullEntry () {
+    showLightBox () {
       this.lightBoxOn = true
+    },
+    closeLightBox () {
+      this.lightBoxOn = false
     }
   }
 }

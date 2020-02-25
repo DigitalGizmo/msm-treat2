@@ -16,7 +16,7 @@
             <!-- <img src="@/assets/logo.png"> -->
             <img :src="'images/small/' + entry.slug + '.jpg'">
         </div>
-        <a @click="showFullEntry">Show Full Entry</a>
+        <a @click="showLightBox">Show Full Entry</a>
 
         <div class="journal-text">
             <span v-html="entry.entry_text"></span>
@@ -39,7 +39,7 @@ export default {
       type: Object
     },
     incEntry: Function,
-    showFullEntry: Function
+    showLightBox: Function
   },
   computed: {
 

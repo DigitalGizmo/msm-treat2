@@ -1,6 +1,7 @@
 <template>
-  <div class="lightbox">
+  <div class="lightbox" @click.self="closeLightBox">
     <div id="slimpop-wrapper">
+      <p> <a @click="closeLightBox">Close</a> </p>
       <img :src="'images/large/' + entry.slug + '.jpg'">
       <div>
         <span v-html="entry.interpret_more"></span>
@@ -20,7 +21,8 @@ export default {
   props: {
     entry: {
       type: Object
-    }
+    },
+    closeLightBox: Function
     // incEntry: Function,
   }
 }

@@ -1,5 +1,19 @@
 <template>
-    <section class="journal-info-panel">
+  <section class="journal-info-panel">
+      <template v-if="entry.slug === 'intro'">
+        <header>
+          <h3>Introduction</h3>
+          <h2>Explore Joseph Treat's Map and Journal</h2>
+        </header>
+        <div class="journal-text">
+          <span v-html="entry.interpret_blurb"></span>
+          <a href = "#" v-on:click = "incEntry('next')">BEGIN EXPLORING</a>
+        </div><!-- /journal-text -->
+      </template>
+      <template v-else>
+        <h3><a href="#"
+          v-on:click="reSetEntry(0)">INTRO - Explore Joseph Treat's Journey</a>
+        </h3>
         <p>
           <a @click="incEntry('prev')">previous</a> |
           <a v-if="nextExists" @click="incEntry('next')" >next</a>
@@ -17,7 +31,7 @@
             <img :src="'images/small/' + entry.slug + '.jpg'">
         </div>
         <a @click="showLightBox">Show Full Entry</a>
-
+      </template>
     </section>
 </template>
 
@@ -35,6 +49,7 @@ export default {
       type: Object
     },
     incEntry: Function,
+    reSetEntry: Function,
     showLightBox: Function
   },
   computed: {

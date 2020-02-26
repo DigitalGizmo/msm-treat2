@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>This could be a Maine State Museum banner 
+    <p>This could be a Maine State Museum banner
     </p>
     <div  class="wrapper">
       <treat-map
@@ -11,6 +11,7 @@
       <treat-panel
           :entry="entry"
           :incEntry="incrementEntry"
+          :reSetEntry="setEntry"
           :showLightBox="showLightBox"
       ></treat-panel>
     </div>
@@ -35,9 +36,9 @@ export default {
       lightBoxOn: false,
       tempData: [],
       entries: [
-        { title: "Joseph ", slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>Joseph Treat set out </p>', interpret_blurb: 'text for the intro', interpret_more: '' },
+        { title: 'Joseph', slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>Joseph Treat set out </p>', interpret_blurb: 'text for the intro', interpret_more: '' }
       ],
-      entry: { title: "Joseph Treat's Journal", slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>to explore </p>', interpret_blurb: 'place holder blurb', interpret_more: '' }
+      entry: { title: 'Joseph Treat&apos;s Journal', slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>to explore </p>', interpret_blurb: 'place holder blurb', interpret_more: '' }
     }
   },
   components: {

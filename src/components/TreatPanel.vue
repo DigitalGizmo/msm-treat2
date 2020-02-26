@@ -18,10 +18,6 @@
         </div>
         <a @click="showLightBox">Show Full Entry</a>
 
-        <div class="journal-text">
-            <span v-html="entry.entry_text"></span>
-        </div><!-- /journal-text -->
-
     </section>
 </template>
 

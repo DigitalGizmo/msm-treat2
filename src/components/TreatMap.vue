@@ -6,7 +6,7 @@
         id="mapdiv"
         :zoom="zoom"
         :center="initLocation"
-        :options="{  }"
+        :options="mapOptions"
         :noBlockingAnimations="noBlocking"
         name="Walter"
         ref="greenMap"
@@ -30,7 +30,8 @@
             v-for="(item, index) in entries"
             :key="item.slug"
             :lat-lng="latAndLng(item.lat, item.lon)"
-            @click="reSetEntry(index)"
+            :icon="treatIcon"
+            @click="goMarker(index)"
             >
             <l-tooltip>Hello! {{ item.title }}</l-tooltip>
         </l-marker>
@@ -62,8 +63,7 @@
 
 <script>
 import { LMap, LTileLayer, LMarker, LTooltip, LGeoJson } from 'vue2-leaflet'
-// import L from 'leaflet'
-import { latLng, Point } from 'leaflet'
+import { latLng, icon, Point } from 'leaflet'
 import { eventBus } from '../main'
 
 export default {
@@ -106,9 +106,26 @@ export default {
       currentCenter: latLng(47.41322, -1.219482),
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5
+        zoomSnap: 0.5,
+        zoomControl: false
       },
       showGreenleaf: true,
+      treatIcon: icon({
+        iconUrl: 'images/markers/treat-marker-icon-2x.png',
+        iconSize: [25, 41], // size of the icon
+        shadowSize: [40, 54], // size of the shadow
+        iconAnchor: [15, 54], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62], // the same for the shadow
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      }),
+      selectedIcon: icon({
+        iconUrl: 'images/markers/hilite-treat-marker-icon-2x.png',
+        iconSize: [25, 41], // size of the icon
+        shadowSize: [40, 54], // size of the shadow
+        iconAnchor: [15, 54], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62], // the same for the shadow
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      }),
       geojson: {
         type: 'FeatureCollection',
         name: 'TreatPat-4326',
@@ -150,6 +167,10 @@ export default {
     latAndLng (pLat, pLng) {
       // return latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
       return latLng(pLat, pLng)
+    },
+    goMarker (index) {
+      console.log('-- reseting entry : ' + index)
+      this.reSetEntry(index)
     },
     innerClick () {
       alert('Click!')

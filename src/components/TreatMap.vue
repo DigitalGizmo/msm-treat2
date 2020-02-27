@@ -35,7 +35,7 @@
             <l-tooltip>Hello! {{ item.title }}</l-tooltip>
         </l-marker>
       </l-map>
-      </section>
+    </section>
     <div class="map-layers-controls">
       <!-- toggle greeleaf  -->
       <input
@@ -183,6 +183,17 @@ export default {
     grid-row: 1;
     grid-column: 1 / 3;
     position: relative;
+  }
+
+  .map-area {
+    display: block;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  #mapdiv {
+    height: 100%;
   }
 
   .map-layers-controls {

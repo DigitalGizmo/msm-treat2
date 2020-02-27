@@ -177,7 +177,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }

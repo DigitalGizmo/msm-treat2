@@ -61,7 +61,7 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
 h2 {
   font-size: 1.5em;
   margin: 0.83em 0;

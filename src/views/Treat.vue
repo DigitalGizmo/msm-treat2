@@ -2,7 +2,7 @@
   <div>
     <p>This could be a Maine State Museum banner
     </p>
-    <div  class="wrapper">
+    <div class="wrapper">
       <treat-map
           :entry="entry"
           :entries="entries"
@@ -466,10 +466,6 @@ dl dd {
   margin: 0;
 }
 
-ul.indented {
-  margin: 0 0 0.8em 0.8em;
-}
-
 table {
   border-collapse: collapse;
   margin: 0.8em 0;
@@ -496,11 +492,11 @@ th {
 }
 
 html {
-  background-color: #fff4e4;
+  background-color: #eff0de;
 }
 
 body {
-  color: #7d7664;
+  color: #DFDFD0;
   font-family: "Libre Baskerville", serif;
   font-size: 1em;
   line-height: 1.6;
@@ -512,7 +508,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Libre Baskerville", serif;
   font-size: 1em;
   font-weight: normal;
   line-height: 1.2;
@@ -524,12 +519,12 @@ p {
 }
 
 a {
-  color: #b12b00;
+  color: #FFBF00;
   text-decoration: none;
   transition: color 150ms ease;
 }
 a:active, a:focus, a:hover {
-  color: #852000;
+  color: #C64C17;
 }
 
 hr {
@@ -550,143 +545,12 @@ blockquote {
   font-style: italic;
 }
 
-/*.map-empty {
-  overflow: visible;
-}*/
-
-/*@media screen and (min-width: 55em) {
-  .map-empty {
-    overflow: auto;
-  }
-}*/
 .wrapper {
   display: grid;
   grid-template-rows: 100vh;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 45% 55%;
   grid-gap: 0px;
-  height: 100vh;
   margin: 0;
-}
-
-.map-wrapper {
-  grid-row: 1;
-  grid-column: 1 / 3;
-  position: relative;
-}
-
-/*.map-wrapper {
-  float: none;
-  width: 100%;
-}
-@media screen and (min-width: 55em) {
-  .map-wrapper {
-    float: right;
-    width: 50%;
-  }
-}*/
-
-/* @media screen and (min-width: 55em) {
-  .journal-info-panel {
-   display: block;
-    margin-right: 50%;
-    width: 50%;
-
-    }
-}*/
-
-/*@media screen and (min-width: 55em) {
-  .map-control-panel {
-    display: block;
-    float: left;
-    width: 3%;
-  }
-}*/
-
-.map-area {
-  display: block;
-  height: 100vh;
-  position: relative;
-  z-index: 1;
-}
-
-#mapdiv {
-  height: 100%;
-  /*height: 600px;
-  z-index: 85;*/
-}
-
-.journal-info-panel {
-  color: #fff4e4;
-  padding: 1.6em;
-  /*height: 100vh;*/
-  grid-row: 1;
-  grid-column: 1;
-  background-color: rgba(53, 53, 36, 0.6);
-  position: relative;
-  z-index: 15;
-}
-
-header h2 {
-  font-style: italic;
-  font-size: 2em;
-  margin: 0;
-}
-
-header h3 {
-  font-style: italic;
-  font-size: 1em;
-  margin: .25em 0;
-}
-
-.journal-image img {
-  max-height: 50vh;
-  max-width: 70%;
-  padding: 2px;
-  border: 1px solid #b3aa98;
-  float: left;
-  margin-right: 20px;
-  margin-bottom: 1.6em;
-}
-
-.journal-info-panel a:link, .journal-info-panel a:visited {
-  color: #FFDC72;
-}
-
-.journal-info-panel a:hover {
-  color: #fff4e4;
-  text-decoration: underline;
-}
-
-.journal-text {
-  background-color: rgba(53, 53, 36, 0.8);
-  border: 1px solid #b3aa98;
-  clear: left;
-  height: 30%;
-  overflow: scroll;
-  padding: 0.8em;
-}
-
-.map-layers-controls {
-  background-color: rgba(53, 53, 36, 0.8);
-  border: 1px solid #b3aa98;
-  font-size: .75em;
-  padding: 1em;
-  position: absolute;
-  right: 2%;
-  top: 2%;
-  width: 10%;
-  z-index: 17;
-}
-
-/*just a hack*/
-input {
-  float:left;
-}
-
-/* Needed to keep the pointer over markers -- otherwise reverts to grab on change*/
-.leaflet-overlay-pane path,
-.leaflet-marker-icon {
-  cursor: pointer;
 }
 
 </style>

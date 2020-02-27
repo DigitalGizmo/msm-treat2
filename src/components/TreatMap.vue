@@ -178,12 +178,42 @@ export default {
 </script>
 
 <style lang="scss">
-input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-input[type="checkbox"], input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
+
+  .map-wrapper {
+    grid-row: 1;
+    grid-column: 1 / 3;
+    position: relative;
+  }
+
+  .map-layers-controls {
+    background-color: rgba(53, 53, 36, 0.8);
+    border: 1px solid #b3aa98;
+    font-size: .75em;
+    padding: 1em;
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    width: 10%;
+    z-index: 17;
+  }
+
+  /*just a hack*/
+  input {
+    float:left;
+  }
+
+  /* Needed to keep the pointer over markers -- otherwise reverts to grab on change*/
+  .leaflet-overlay-pane path,
+  .leaflet-marker-icon {
+    cursor: pointer;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
 
 </style>

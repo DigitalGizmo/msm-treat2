@@ -1,7 +1,10 @@
 <template>
   <div class="lightbox" @click.self="closeLightBox">
     <div id="slimpop-wrapper">
-      <p class="close"> <a @click="closeLightBox">Close</a> </p>
+      <p class="close">
+        <a @click="closeLightBox">Close</a>
+      </p>
+
       <h2>Treat&rsquo;s Journal &bull; Site X</h2>
       <h1>{{ entry.title }}</h1>
 
@@ -93,6 +96,10 @@ export default {
       grid-column: 2;
       letter-spacing: .05em;
       text-align: right;
+    }
+
+    .close a {
+      color: #C64C17;
     }
   }
 

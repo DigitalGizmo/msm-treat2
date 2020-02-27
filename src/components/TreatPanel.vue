@@ -1,27 +1,30 @@
 <template>
-  <section class="journal-info-panel">
+    <section class="journal-info-panel">
       <template v-if="entry.slug === 'intro'">
+
         <header>
           <h3>Introduction</h3>
-          <h2>Explore Joseph Treat&rsquo;s Map and Journal</h2>
+          <h1>Explore Joseph Treat&rsquo;s Map and Journal</h1>
         </header>
+
         <div class="journal-text">
           <span v-html="entry.interpret_blurb"></span>
-          <a href = "#" v-on:click = "incEntry('next')">BEGIN EXPLORING</a>
+          <a href = "#" v-on:click = "incEntry('next')">Begin Exploring</a>
         </div><!-- /journal-text -->
+
       </template>
+
       <template v-else>
          <p class="nav">
-          <a @click="incEntry('prev')">previous</a> |
-          <a v-if="nextExists" @click="incEntry('next')" >next</a>
+          <a @click="incEntry('prev')">&#8604; Previous</a> &bull; Site X &bull; <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
         </p>
 
          <header>
             <h3>
               <a href="#"
-              v-on:click="reSetEntry(0)">INTRO - Explore Joseph Treat&rsquo;s Journey</a>
+              v-on:click="reSetEntry(0)">Intro &bull; <span class="subtitle">Explore Joseph Treat&rsquo;s Journey</span></a>
             </h3>
-            <h2>{{ entry.title }}</h2>
+            <h1>{{ entry.title }}</h1>
             <p>{{ entry.entry_date }}</p>
           </header>
 
@@ -30,8 +33,8 @@
         </div>
 
         <div class="journal-image">
-          <h3><a @click="showLightBox">View Treat&rsquo;s Journal Entry for this Site</a></h3>
-          <img :src="'images/small/' + entry.slug + '.jpg'">
+          <h3><a @click="showLightBox">View Treat&rsquo;s Journal Entry for This Site</a></h3>
+          <a @click="showLightBox"><img :src="'images/small/' + entry.slug + '.jpg'"></a>
         </div>
 
       </template>
@@ -68,13 +71,18 @@ export default {
 
   .nav {
     float: right;
+    font-size: 1em;
+    font-variant: small-caps;
+    letter-spacing: .05em;
+    margin-top: -4px;
   }
 
   .journal-info-panel {
-    padding: 1.6em;
+    background-color: rgba(53, 53, 36, 0.75);
+    border: 1px solid #b3aa98;
     grid-row: 1;
     grid-column: 1;
-    background-color: rgba(53, 53, 36, 0.6);
+    padding: 1.6em 3em;
     position: relative;
     z-index: 15;
 
@@ -82,6 +90,12 @@ export default {
       font-size: 1em;
       font-variant: small-caps;
       letter-spacing: .05em;
+
+      .subtitle {
+        font-variant: normal;
+        font-style: italic;
+        letter-spacing: normal;
+      }
     }
   }
 
@@ -103,18 +117,14 @@ export default {
   .journal-text {
     background-color: rgba(53, 53, 36, 0.8);
     border: 1px solid #b3aa98;
-    height: 30%;
+    font-size: 1.15em;
+    height: 35%;
     overflow: scroll;
     padding: 0.8em;
-    margin-bottom: 1em;
+    margin: 1em 0;
   }
 
-  h2 {
-    font-size: 1.5em;
-    margin: 0.83em 0;
-  }
-
-  header h2 {
+  header h1 {
     font-style: italic;
     font-size: 2em;
     margin: 0;

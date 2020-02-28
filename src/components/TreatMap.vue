@@ -1,7 +1,6 @@
 <template>
 
   <div class="map-wrapper">
-    <section class="map-area">
       <l-map
         id="mapdiv"
         :zoom="zoom"
@@ -38,7 +37,6 @@
             <l-tooltip>Hello! {{ item.title }}</l-tooltip>
         </l-marker>
       </l-map>
-    </section>
     <div class="map-layers-controls">
       <!-- toggle greeleaf  -->
       <input
@@ -253,18 +251,13 @@ export default {
   .map-wrapper {
     grid-row: 1;
     grid-column: 1 / 3;
-    position: relative;
-  }
-
-  .map-area {
-    display: block;
-    height: 100vh;
-    position: relative;
-    z-index: 1;
   }
 
   #mapdiv {
+    display: block;
     height: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .map-layers-controls {

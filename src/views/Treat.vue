@@ -1,5 +1,6 @@
 <template>
   <div>
+<!--     <img src="images/msm-logo.gif" class="logo"> -->
     <div class="wrapper">
       <treat-map
           :entry="entry"
@@ -550,6 +551,13 @@ blockquote {
   grid-template-columns: 45% 55%;
   grid-gap: 0px;
   margin: 0;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-height: 30px;
 }
 
 </style>

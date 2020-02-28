@@ -28,10 +28,12 @@
         />
         <l-marker
             v-for="(item, index) in entries"
-            :key="item.slug"
+            :key="index"
             :lat-lng="latAndLng(item.lat, item.lon)"
-            :icon="treatIcon"
-            @click="goMarker(index)"
+            :icon="customIcon"
+            :visible="markerVisibility(index)"
+            @click="goMarker(item, index)"
+            ref="markersRef"
             >
             <l-tooltip>Hello! {{ item.title }}</l-tooltip>
         </l-marker>
@@ -57,6 +59,7 @@
       <p></p>
       <span @click="customZoom(1)">In</span> |
       <span @click="customZoom(-1)">Out</span>
+      <!-- <p> <a @click="testMarkerRefs">test marker refs</a> </p> -->
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
 </template>
@@ -126,6 +129,8 @@ export default {
         shadowAnchor: [4, 62], // the same for the shadow
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       }),
+      customIcon: null,
+      markerObjects: null,
       geojson: {
         type: 'FeatureCollection',
         name: 'TreatPat-4326',
@@ -151,30 +156,6 @@ export default {
         opacity: 1
       }
     }
-
-  },
-  methods: {
-    customZoom (increment) {
-      // console.log(" - current zoom: " + this.$refs["greenMap"].mapObject.getZoom());
-
-      // Need to use full setViewOffset rather than just setZoom, in
-      // order to keep the offset.
-      // Receive a 1 or -1 argument.
-      this.$refs.greenMap.mapObject.setViewOffset(latLng(this.entry.lat,
-        this.entry.lon), [this.offset, 0],
-      this.$refs.greenMap.mapObject.getZoom() + increment)
-    },
-    latAndLng (pLat, pLng) {
-      // return latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
-      return latLng(pLat, pLng)
-    },
-    goMarker (index) {
-      console.log('-- reseting entry : ' + index)
-      this.reSetEntry(index)
-    },
-    innerClick () {
-      alert('Click!')
-    }
   },
   mounted () {
     // Set offset for future use.
@@ -193,7 +174,76 @@ export default {
         this.$refs.greenMap.mapObject.setViewOffset(latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)
       })
-    })
+    }) // end eventBus on
+
+    // set initial markers
+    this.customIcon = this.treatIcon
+
+    // // Attempt at marker access for highlighting
+    // this.$nextTick(() => {
+    //   this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
+    //   // console.log('marker ref: ' + this.$refs.markersRef[0])
+    //   // this.$refs[0].markersRef
+    // })
+  },
+  methods: {
+    customZoom (increment) {
+      // console.log(" - current zoom: " + this.$refs["greenMap"].mapObject.getZoom());
+
+      // Need to use full setViewOffset rather than just setZoom, in
+      // order to keep the offset.
+      // Receive a 1 or -1 argument.
+      this.$refs.greenMap.mapObject.setViewOffset(latLng(this.entry.lat,
+        this.entry.lon), [this.offset, 0],
+      this.$refs.greenMap.mapObject.getZoom() + increment)
+    },
+    latAndLng (pLat, pLng) {
+      // return latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
+      return latLng(pLat, pLng)
+    },
+    goMarker (item, index) {
+      console.log('-- reseting item: ' + item.title + ', index: ' + index)
+
+      // Added property of entry approach to marker access for selected
+      // if (this.currentItem) {
+      //   this.currentItem.icon = this.treatIcon
+      // }
+      // this.currentItem = item
+      // console.log('-- curr item icon: ' + item.icon)
+      // this.currentItem.icon = this.selectedIcon
+
+      // index approach
+      // this.markerObjects[index].icon = this.selectedIcon
+      // this.markerObjects[index].openTooltip()
+
+      this.reSetEntry(index)
+    },
+    markerVisibility (index) {
+      if (index === 0) {
+        return false
+      } else {
+        return true
+      }
+    },
+    innerClick () {
+      alert('Click!')
+    },
+    testMarkerRefs () {
+      console.log('got to testMarkerRefs')
+      // Attempt at marker access for highlighting
+      // this.$nextTick(() => {
+      //   // this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
+      console.log('marker ref: ' + this.$refs.markersRef[0].pane)
+
+      // this.$refs.markersRef[0].visible = false
+
+      this.$refs.markersRef[1].icon = this.selectedIcon
+      //   // this.$refs[0].markersRef
+      // })
+      // this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
+      // console.log(' marker obj: ' + this.markerObjects[1].open)
+      // this.markerObjects[index].openTooltip()
+    }
   }
 }
 </script>

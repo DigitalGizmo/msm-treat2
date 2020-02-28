@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>This could be a Maine State Museum banner
-    </p>
     <div class="wrapper">
       <treat-map
           :entry="entry"
@@ -352,15 +350,15 @@ button:disabled:hover, input[type="button"]:disabled:hover, input[type="reset"]:
 }
 
 a:link {
-  color: #b12b00;
+  color: #FFBF00;
 }
 
 a:visited {
-  color: #8e2200;
+  color: #FFBF00;
 }
 
 a:hover {
-  color: #d94a38;
+  color: #C64C17;
   text-decoration: underline;
 }
 
@@ -523,6 +521,7 @@ a {
   text-decoration: none;
   transition: color 150ms ease;
 }
+
 a:active, a:focus, a:hover {
   color: #C64C17;
 }

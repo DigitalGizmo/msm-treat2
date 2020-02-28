@@ -7,10 +7,15 @@
           <h1>Explore Joseph Treat&rsquo;s Map and Journal</h1>
         </header>
 
-        <div class="journal-text">
+        <div class="journal-text intro-text">
           <span v-html="entry.interpret_blurb"></span>
-          <a href = "#" v-on:click = "incEntry('next')">Begin Exploring</a>
         </div><!-- /journal-text -->
+
+        <h3><a href = "#" v-on:click = "incEntry('next')">Begin Exploring</a></h3>
+
+        <div class="intro-image">
+          <img :src="'images/small/' + entry.slug + '.jpg'">
+        </div>
 
       </template>
 
@@ -70,6 +75,7 @@ export default {
 <style lang="scss">
 
   .nav {
+    color: #FFBF00;
     float: right;
     font-size: 1em;
     font-variant: small-caps;
@@ -99,19 +105,16 @@ export default {
     }
   }
 
-  .journal-image img {
-    max-width: 45%;
-    padding: 2px;
+  .intro-image img {
     border: 1px solid #b3aa98;
+    max-width: 75%;
+    padding: 2px;
   }
 
-  .journal-info-panel a:link, .journal-info-panel a:visited {
-    color: #FFDC72;
-  }
-
-  .journal-info-panel a:hover {
-    color: #fff4e4;
-    text-decoration: underline;
+  .journal-image img {
+    border: 1px solid #b3aa98;
+    padding: 2px;
+    max-width: 45%;
   }
 
   .journal-text {
@@ -122,6 +125,10 @@ export default {
     overflow: scroll;
     padding: 0.8em;
     margin: 1em 0;
+  }
+
+  .intro-text {
+    overflow: hidden;
   }
 
   header h1 {

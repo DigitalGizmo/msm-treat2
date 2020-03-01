@@ -88,21 +88,36 @@ export default {
     border: 1px solid #b3aa98;
     grid-row: 1;
     grid-column: 1;
-    padding: 1.6em 3em;
     position: relative;
     z-index: 15;
+    /*for really big displays*/
+    padding: 2em 4em;
+  }
 
-    h3 {
-      font-size: 1em;
-      font-variant: small-caps;
-      letter-spacing: .05em;
-
-      .subtitle {
-        font-variant: normal;
-        font-style: italic;
-        letter-spacing: normal;
-      }
+  /*for medium displays*/
+  @media screen and (max-width: 1500px) {
+    .journal-info-panel {
+      padding: 1.6em 3em;
     }
+  }
+
+  /*for small displays*/
+  @media screen and (max-width: 1000px) {
+    .journal-info-panel {
+      padding: 1em;
+    }
+  }
+
+  .journal-info-panel h3 {
+    font-size: 1em;
+    font-variant: small-caps;
+    letter-spacing: .05em;
+  }
+
+  .journal-info-panel h3.subtitle {
+    font-variant: normal;
+    font-style: italic;
+    letter-spacing: normal;
   }
 
   .intro-image img {

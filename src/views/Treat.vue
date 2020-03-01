@@ -548,9 +548,16 @@ blockquote {
 .wrapper {
   display: grid;
   grid-template-rows: 100vh;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 35% 65%;
   grid-gap: 0px;
   margin: 0;
+}
+
+/*for less than super wide displays*/
+@media screen and (max-width: 1800px) {
+  .wrapper {
+    grid-template-columns: 45% 55%;
+  }
 }
 
 .logo {

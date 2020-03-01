@@ -53,11 +53,11 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2em;
-    height: 85%;
+    height: 80%;
     margin: 5% auto;
     overflow: scroll;
     padding: 1em 3em 3em 3em;
-    width: 85%;
+    width: 60%;
 
     h2 {
       font-size: 1em;
@@ -103,4 +103,11 @@ export default {
     }
   }
 
+  /*for less than super wide displays*/
+  @media screen and (max-width: 1800px) {
+    #slimpop-wrapper {
+      height: 85%;
+      width: 85%;
+    }
+  }
 </style>

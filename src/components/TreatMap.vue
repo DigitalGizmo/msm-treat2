@@ -55,8 +55,8 @@
       <label for="two">Terrain</label>
       <!-- custom zoom -->
       <p></p>
-      <span @click="customZoom(1)">In</span> |
-      <span @click="customZoom(-1)">Out</span>
+      <span @click="customZoom(1)">--In--</span>&nbsp;&nbsp; | &nbsp;&nbsp;
+      <span @click="customZoom(-1)">++Out++</span>
       <!-- <p> <a @click="testMarkerRefs">test marker refs</a> </p> -->
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
@@ -68,7 +68,7 @@ import { latLng, icon, Point } from 'leaflet'
 import { eventBus } from '../main'
 
 export default {
-  name: 'Example',
+  name: 'TreatMap',
   components: {
     LMap,
     LTileLayer,
@@ -100,7 +100,6 @@ export default {
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
       terrain: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-' +
         'background/{z}/{x}/{y}.png',
-      greenleaf: 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png',
       path: '/assets/icons/',
       initLocation: latLng(46.15, -68.76),
       currentZoom: 11.5,
@@ -108,7 +107,10 @@ export default {
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
-        zoomControl: false
+        zoomControl: false,
+        touchZoom: true,
+        dragging: true,
+        tap: false
       },
       showGreenleaf: true,
       treatIcon: icon({
@@ -153,6 +155,11 @@ export default {
         dashArray: (8, 7),
         opacity: 1
       }
+    },
+    greenleaf () {
+      // return 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png'
+      // return process.env.VUE_APP_GREENLEAF_URL
+      return 'tiles/treat/{z}/{x}/{y}.png'
     }
   },
   mounted () {

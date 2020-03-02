@@ -63,8 +63,13 @@ export default {
     reSetEntry: Function,
     showLightBox: Function
   },
-  computed: {
-
+  methods: {
+    // @click="countTouches($event)"
+    // countTouches (e) {
+    //   // var x = event.targetTouches.length;
+    //   console.log(' num target touches: ' + e.targetTouches.length)
+    //   console.log(' num target name: ' + e.target.getAttribute('class'))
+    // }
   }
 }
 // Could have method here that operat on prop as

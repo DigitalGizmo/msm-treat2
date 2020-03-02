@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Treat from '../views/Treat.vue'
+import Attract from '../views/Attract.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'Treat',
     component: Treat
+  },
+  {
+    path: '/attract',
+    name: 'Attract',
+    component: Attract
   },
   {
     path: '/about',

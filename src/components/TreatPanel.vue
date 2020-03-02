@@ -2,12 +2,12 @@
     <section class="journal-info-panel">
       <template v-if="entry.slug === 'intro'">
 
-        <header>
+        <header class="intro">
           <h3>Introduction</h3>
           <h1>Explore Joseph Treat&rsquo;s Map and Journal</h1>
         </header>
 
-        <div class="journal-text intro-text">
+        <div class="intro-text">
           <span v-html="entry.interpret_blurb"></span>
         </div><!-- /journal-text -->
 
@@ -79,9 +79,13 @@ export default {
 
 <style lang="scss">
 
+  .intro {
+    margin-top: 40px;
+  }
+
   .nav {
     color: #FFBF00;
-    float: right;
+    text-align: right;
     font-size: 1em;
     font-variant: small-caps;
     letter-spacing: .05em;
@@ -114,9 +118,10 @@ export default {
   }
 
   .journal-info-panel h3 {
-    font-size: 1em;
+    font-size: 1.25em;
     font-variant: small-caps;
     letter-spacing: .05em;
+    margin-bottom: 0;
   }
 
   .journal-info-panel h3.subtitle {
@@ -131,16 +136,20 @@ export default {
     padding: 2px;
   }
 
-  .journal-image img {
-    border: 1px solid #b3aa98;
-    padding: 2px;
-    max-width: 45%;
+  .journal-image {
+    height: 35%;
+
+    img {
+      border: 1px solid #b3aa98;
+      padding: 2px;
+      max-height: 100%;
+    }
   }
 
   .journal-text {
     background-color: rgba(53, 53, 36, 0.8);
     border: 1px solid #b3aa98;
-    font-size: 1.15em;
+    font-size: 1.25em;
     height: 35%;
     overflow: scroll;
     padding: 0.8em;
@@ -148,13 +157,17 @@ export default {
   }
 
   .intro-text {
-    overflow: hidden;
+    font-size: 1.25em;
   }
 
   header h1 {
     font-style: italic;
-    font-size: 2em;
+    font-size: 2.75em;
     margin: 0;
+  }
+
+  header p {
+    font-size: 1.25em;
   }
 
 </style>

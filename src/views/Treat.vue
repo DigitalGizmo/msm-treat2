@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--     <img src="images/msm-logo.gif" class="logo"> -->
+    <img src="images/msm-logo.gif" class="logo">
     <div class="wrapper">
       <treat-map
           :entry="entry"
@@ -378,7 +378,6 @@ legend {
 
 label {
   display: block;
-  margin-bottom: 0.4em;
 }
 
 input,
@@ -433,7 +432,8 @@ textarea {
 [type="checkbox"],
 [type="radio"] {
   display: inline;
-  margin-right: 0.4em;
+  margin-right: 0.5em;
+  margin-top: 0.25em;
 }
 
 [type="file"] {
@@ -562,9 +562,12 @@ blockquote {
 
 .logo {
   position: absolute;
+  background-color: #DFDFD0;
+  padding: 3px;
   top: 10px;
   left: 10px;
-  max-height: 30px;
+  max-height: 40px;
+  z-index: 102;
 }
 
 </style>

@@ -38,25 +38,46 @@
         </l-marker>
       </l-map>
     <div class="map-layers-controls">
-      <!-- toggle greeleaf  -->
-      <input
-        type="radio"
-        id="one"
-        v-model="showGreenleaf"
-        v-bind:value="true"
-      />
-      <label for="one">Greenleaf/Treat</label>
-      <input
-        type="radio"
-        id="two"
-        v-model="showGreenleaf"
-        v-bind:value="false"
-      />
-      <label for="two">Terrain</label>
+      <div class="layers">
+        <h3>Map Layers</h3>
+        <!-- toggle greeleaf  -->
+        <p>
+          <input
+            type="radio"
+            id="one"
+            v-model="showGreenleaf"
+            v-bind:value="true"
+          />
+          <label for="one">Greenleaf/Treat</label>
+        </p>
+        <p>
+          <input
+            type="radio"
+            id="two"
+            v-model="showGreenleaf"
+            v-bind:value="false"
+          />
+          <label for="two">Terrain</label>
+        </p>
+        <p>
+          <input
+            type="checkbox"
+            id="two"
+            v-model="showGreenleaf"
+            v-bind:value="false"
+          />
+          <label for="two">Roads &amp; Towns</label>
+        </p>
+
+      </div>
       <!-- custom zoom -->
-      <p></p>
-      <span @click="customZoom(1)">--In--</span>&nbsp;&nbsp; | &nbsp;&nbsp;
-      <span @click="customZoom(-1)">++Out++</span>
+      <h3>Map Zoom</h3>
+      <span @click="customZoom(1)">
+        <img :src="'images/markers/zoom-in.jpg'">
+      </span>
+      <span @click="customZoom(-1)">
+        <img :src="'images/markers/zoom-out.jpg'">
+      </span>
       <!-- <p> <a @click="testMarkerRefs">test marker refs</a> </p> -->
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
@@ -158,8 +179,8 @@ export default {
     },
     greenleaf () {
       // return 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png'
-      // return process.env.VUE_APP_GREENLEAF_URL
-      return 'tiles/treat/{z}/{x}/{y}.png'
+      return process.env.VUE_APP_GREENLEAF_URL
+      // return 'tiles/treat/{z}/{x}/{y}.png'
     }
   },
   mounted () {
@@ -270,13 +291,33 @@ export default {
   .map-layers-controls {
     background-color: rgba(53, 53, 36, 0.8);
     border: 1px solid #b3aa98;
-    font-size: .75em;
-    padding: 1em;
+    font-size: .8em;
+    padding: 1em 1.5em;
     position: absolute;
     right: 2%;
     top: 2%;
-    width: 10%;
     z-index: 17;
+
+    div.layers {
+      margin-bottom: 1.5em;
+    }
+
+    div.layers p {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      font-size: 1.25em;
+      font-variant: small-caps;
+      letter-spacing: .05em;
+      margin-bottom: 0.15em;
+    }
+
+    img {
+      max-height: 36px;
+      margin-right: .75em;
+    }
   }
 
   /*just a hack*/

@@ -23,3 +23,4 @@ yarn-error.log*
 # Don adding:
 public/images
 public/tiles
+public/data

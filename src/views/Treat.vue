@@ -74,7 +74,7 @@ export default {
       this.lightBoxOn = false
     },
     fetchData () {
-      this.$http.get('https://msm-treat-admin.digitalgizmo.com/journal/entries/?format=json')
+      this.$http.get(process.env.VUE_APP_DATA_URL)
         .then(response => {
           // return response
           this.entries = response.data

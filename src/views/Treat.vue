@@ -76,7 +76,9 @@ export default {
       this.lightBoxOn = false
     },
     fetchData () {
-      this.$http.get(process.env.VUE_APP_DATA_URL)
+      // this.$http.get(process.env.VUE_APP_DATA_URL)
+      this.$http.get(process.env.VUE_APP_BASE_DATA_URL +
+        process.env.VUE_APP_DATA_PATH)
         .then(response => {
           // return response
           this.entries = response.data

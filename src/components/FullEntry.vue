@@ -55,7 +55,8 @@ export default {
     grid-gap: 2em;
     height: 80%;
     margin: 5% auto;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 1em 3em 3em 3em;
     width: 60%;
 

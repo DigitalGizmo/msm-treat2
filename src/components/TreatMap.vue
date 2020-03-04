@@ -62,9 +62,7 @@
         <p>
           <input
             type="checkbox"
-            id="two"
-            v-model="showGreenleaf"
-            v-bind:value="false"
+            id="three"
           />
           <label for="two">Roads &amp; Towns</label>
         </p>

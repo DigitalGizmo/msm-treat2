@@ -152,7 +152,8 @@ export default {
     border: 1px solid #b3aa98;
     font-size: 1.25em;
     height: 35%;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 0.8em;
     margin: 1em 0;
   }

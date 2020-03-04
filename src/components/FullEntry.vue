@@ -5,7 +5,7 @@
         <a @click="closeLightBox">Close</a>
       </p>
 
-      <h2>Treat&rsquo;s Journal &bull; Site X</h2>
+      <h2>Treat&rsquo;s Journal &bull; Site {{ currIndex }}</h2>
       <h1>{{ entry.title }}</h1>
 
         <img :src="'images/large/' + entry.slug + '.jpg'" class="entry-map">
@@ -28,8 +28,8 @@ export default {
     entry: {
       type: Object
     },
-    closeLightBox: Function
-    // incEntry: Function,
+    closeLightBox: Function,
+    currIndex: Number
   }
 }
 </script>

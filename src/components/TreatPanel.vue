@@ -4,7 +4,7 @@
 
         <header class="intro">
           <h3>Introduction</h3>
-          <h1>Explore Joseph Treat&rsquo;s Map and Journal</h1>
+          <h1>{{ entry.title }}</h1>
         </header>
 
         <div class="intro-text">

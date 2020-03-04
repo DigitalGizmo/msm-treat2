@@ -20,6 +20,7 @@
       v-if="lightBoxOn"
         :entry="entry"
         :closeLightBox="closeLightBox"
+        :currIndex="currIndex"
     ></full-entry>
   </div>
 </template>

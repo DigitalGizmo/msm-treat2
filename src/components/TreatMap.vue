@@ -13,7 +13,7 @@
         <l-tile-layer
           :url="terrain"
           :attribution="attribution"
-          :tms="false"
+          :tms="true"
         />
         <l-tile-layer
           v-if="showGreenleaf"
@@ -57,15 +57,15 @@
             v-model="showGreenleaf"
             v-bind:value="false"
           />
-          <label for="two">Terrain</label>
+          <label for="two">Terrain/Towns</label>
         </p>
-        <p>
+        <!-- <p>
           <input
             type="checkbox"
             id="three"
           />
           <label for="two">Roads &amp; Towns</label>
-        </p>
+        </p> -->
 
       </div>
       <!-- custom zoom -->
@@ -109,7 +109,7 @@ export default {
   },
   data () {
     return {
-      zoom: 8,
+      zoom: 8.5,
       currZoomLevel: 8,
       center: latLng(this.entry.lat, this.entry.lon),
       noBlocking: false,
@@ -118,8 +118,6 @@ export default {
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
-      terrain: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-' +
-        'background/{z}/{x}/{y}.png',
       path: '/assets/icons/',
       initLocation: latLng(46.15, -68.76),
       currentZoom: 11.5,
@@ -130,7 +128,13 @@ export default {
         zoomControl: false,
         touchZoom: true,
         dragging: true,
-        tap: false
+        tap: false,
+        minZoom: 7,
+        maxZoom: 11,
+        maxBounds: [
+          [43, -74], // southWest
+          [48, -66] // northEast
+        ]
       },
       showGreenleaf: true,
       treatIcon: icon({
@@ -176,6 +180,9 @@ export default {
         opacity: 1
       }
     },
+    terrain () {
+      return process.env.VUE_APP_TERRAIN_URL
+    },
     greenleaf () {
       // return 'http://dev.digitalgizmo.com/msm-treat/map/tiles/treat/{z}/{x}/{y}.png'
       return process.env.VUE_APP_GREENLEAF_URL
@@ -203,6 +210,9 @@ export default {
 
     // set initial markers
     this.customIcon = this.treatIcon
+
+    // Set zoom to Admin entry
+    this.zoom = this.entries[0].zoom_level
 
     // // Attempt at marker access for highlighting
     // this.$nextTick(() => {

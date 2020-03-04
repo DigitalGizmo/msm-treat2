@@ -1,19 +1,23 @@
 <template>
   <div class="attract-wrapper">
     <section class="attract-panel">
-      <article class="attract-text">
-        <h1>
-          Journal &amp; Plans of Survey<br>
-          by<br>
-          Joseph Treat<br>
-          1820
-        </h1>
-        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-        </p>
-        <p>
-          <router-link to="/">Touch this link to begin</router-link>
-        </p>
-      </article>
+      <div class="border">
+        <article class="attract-text">
+            <h1>
+              Traveling through Maine<br>
+              200 Years Ago with<br>
+              Joseph Treat and John Neptune
+            </h1>
+            <p>
+              Paddling two birch bark canoes full of supplies for what would surely be a difficult journey, Joseph Treat, John Neptune, and Jacob Holyoke headed north up the Penobscot River on September 27, 1820.
+            </p>
+            <p>
+              <router-link to="/">
+                Tap anywhere to join this expedition and explore northern Maine in 1820
+              </router-link>
+            </p>
+        </article>
+      </div>
     </section>
   </div>
 </template>
@@ -31,16 +35,23 @@ export default {
 
 <style lang="scss">
 
-  .attract-wrapper img {
-    background: beige;
+  .attract-wrapper {
+    background: #DFDFD0;
   }
 
   .attract-panel {
     background-color: rgba(53, 53, 36, 0.8);
     height: 100vh;
     margin: 0 auto;
-    padding: 4em;
+    padding: 0 3px;
     width: 50%;
+  }
+
+  .border {
+    border-left: 1px solid #b3aa98;
+    border-right: 1px solid #b3aa98;
+    height: 100vh;
+    padding: 4em;
   }
 
   .attract-text {

@@ -6,12 +6,14 @@
           :entry="entry"
           :entries="entries"
           :reSetEntry="setEntry"
+          :currIndex="currIndex"
       ></treat-map>
       <treat-panel
           :entry="entry"
           :incEntry="incrementEntry"
           :reSetEntry="setEntry"
           :showLightBox="showLightBox"
+          :currIndex="currIndex"
       ></treat-panel>
     </div>
     <full-entry

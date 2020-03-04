@@ -34,7 +34,7 @@
             @click="goMarker(item, index)"
             ref="markersRef"
             >
-            <l-tooltip>Hello! {{ item.title }}</l-tooltip>
+            <l-tooltip>{{ index }}: {{ item.title }}</l-tooltip>
         </l-marker>
       </l-map>
     <div class="map-layers-controls">
@@ -106,7 +106,8 @@ export default {
     },
     reSetEntry: {
       type: Function
-    }
+    },
+    currIndex: Number
   },
   data () {
     return {

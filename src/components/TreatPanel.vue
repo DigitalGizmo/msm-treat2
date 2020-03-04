@@ -21,7 +21,7 @@
 
       <template v-else>
          <p class="nav">
-          <a @click="incEntry('prev')">&#8604; Previous</a> &bull; Site X &bull; <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
+          <a @click="incEntry('prev')">&#8604; Previous</a> &bull; Site {{ currIndex }} &bull; <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
         </p>
 
          <header>
@@ -61,7 +61,8 @@ export default {
     },
     incEntry: Function,
     reSetEntry: Function,
-    showLightBox: Function
+    showLightBox: Function,
+    currIndex: Number
   },
   methods: {
     // @click="countTouches($event)"

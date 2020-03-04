@@ -302,8 +302,9 @@ export default {
     }
 
     div.layers p {
-      margin: 0;
+      margin-bottom: .25em;
       padding: 0;
+      white-space: nowrap;
     }
 
     h3 {

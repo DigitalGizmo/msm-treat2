@@ -44,13 +44,13 @@ export default {
     mapTimeline.set(map, { x: 0 })
     // mapTimeline.yoyo(true)
     // gsap.timeline({repeat: 1, yoyo: true});
-    mapTimeline.from(map, 20, {
+    mapTimeline.from(map, 80, {
       y: -1300,
       repeat: -1, 
       yoyo: true,
       ease: Power1.easeInOut
     })
-    panelTimeline.set(panel, { x: 200 })
+    panelTimeline.set(panel, { x: 200, y: 200 })
     panelTimeline.to(panel, 20, {
       x: 400,
     })
@@ -71,18 +71,14 @@ export default {
 
   .attract-panel {
     background-color: rgba(53, 53, 36, 0.8);
-    height: 100vh;
-    margin: 0 auto;
-    padding: 0 3px;
+    padding: 3px;
     width: 50%;
     /*don wuz here*/
     position: absolute;
   }
 
   .border {
-    border-left: 1px solid #b3aa98;
-    border-right: 1px solid #b3aa98;
-    height: 100vh;
+    border: 1px solid #b3aa98;
     padding: 4em;
   }
 

@@ -81,10 +81,6 @@ export default {
 
 <style lang="scss">
 
-/*  .intro {
-    margin-top: 40px;
-  }*/
-
   header {
     clear: left;
   }
@@ -166,24 +162,24 @@ export default {
   /*for medium displays, less than or equal to 1800px and greater than 1200px*/
   @media screen and (max-width: 1800px) {
     .journal-info-panel {
-      background-color: maroon;
+      /*background-color: maroon;*/
       padding: 1.6em 3em;
     }
   }
 
-  /*for small displays, less than or equal to 1200px and greater than 668px*/
+  /*for small displays, less than or equal to 1200px and greater than 800px*/
   @media screen and (max-width: 1200px) {
     .journal-info-panel {
-      background-color: green;
-      font-size: 0.95em;
+      /*background-color: green;*/
+      font-size: 0.85em;
       padding: 1em;
     }
   }
 
-  /*for tiny displays, less than or equal to 668px*/
-  @media screen and (max-width: 668px) {
+  /*for tiny displays, less than or equal to 800px*/
+  @media screen and (max-width: 800px) {
     .journal-info-panel {
-      background-color: navy;
+      /*background-color: navy;*/
       font-size: 0.7em;
       padding: 1em;
     }

@@ -1,6 +1,9 @@
 <template>
   <div class="attract-wrapper">
-    <section class="attract-panel">
+    <div class="map">
+      <img ref="map" :src="'images/big-bg.jpg'" alt="map">
+    </div>
+    <section ref="panel" class="attract-panel">
       <div class="border">
         <article class="attract-text">
             <h1>
@@ -23,17 +26,44 @@
 </template>
 
 <script>
+import { TimelineLite, Power1 } from 'gsap'
+
 export default {
   data () {
     return {
       testparam: 'voila'
     }
   },
-  name: 'Attract'
+  name: 'Attract',
+  mounted () {
+    const { map } = this.$refs
+    const { panel } = this.$refs
+    const mapTimeline = new TimelineLite ()
+    const panelTimeline = new TimelineLite ()
+
+    mapTimeline.set(map, { x: 0 })
+    // mapTimeline.yoyo(true)
+    // gsap.timeline({repeat: 1, yoyo: true});
+    mapTimeline.from(map, 20, {
+      y: -1300,
+      repeat: -1, 
+      yoyo: true,
+      ease: Power1.easeInOut
+    })
+    panelTimeline.set(panel, { x: 200 })
+    panelTimeline.to(panel, 20, {
+      x: 400,
+    })
+  }
 }
 </script>
 
 <style lang="scss">
+
+  .map {
+    width: 100%;
+    position: absolute;
+  }
 
   .attract-wrapper {
     background: #DFDFD0;
@@ -45,6 +75,8 @@ export default {
     margin: 0 auto;
     padding: 0 3px;
     width: 50%;
+    /*don wuz here*/
+    position: absolute;
   }
 
   .border {

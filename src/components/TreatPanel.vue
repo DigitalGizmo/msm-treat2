@@ -100,20 +100,30 @@ export default {
     grid-column: 1;
     position: relative;
     z-index: 15;
-    /*for really big displays*/
+    /*for super wide displays, greater than 1800px*/
     padding: 2em 4em;
   }
 
-  /*for medium displays*/
-  @media screen and (max-width: 1500px) {
+  /*for medium displays, less than or equal to 1800px and greater than 1200px*/
+  @media screen and (max-width: 1800px) {
     .journal-info-panel {
+      background-color: red;
       padding: 1.6em 3em;
     }
   }
 
-  /*for small displays*/
-  @media screen and (max-width: 1000px) {
+  /*for small displays, less than or equal to 1200px and greater than 668px*/
+  @media screen and (max-width: 1200px) {
     .journal-info-panel {
+      background-color: green;
+      padding: 1em;
+    }
+  }
+
+  /*for tiny displays, less than or equal to 668px*/
+  @media screen and (max-width: 668px) {
+    .journal-info-panel {
+      background-color: blue;
       padding: 1em;
     }
   }

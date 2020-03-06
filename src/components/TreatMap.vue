@@ -48,7 +48,7 @@
             v-model="showGreenleaf"
             v-bind:value="true"
           />
-          <label for="one">Greenleaf/Treat</label>
+          <label for="one">1815 Map</label>
         </p>
         <p>
           <input
@@ -57,7 +57,7 @@
             v-model="showGreenleaf"
             v-bind:value="false"
           />
-          <label for="two">Terrain/Towns</label>
+          <label for="two">Present Day Map</label>
         </p>
         <!-- <p>
           <input

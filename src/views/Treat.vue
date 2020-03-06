@@ -553,12 +553,13 @@ blockquote {
 .wrapper {
   display: grid;
   grid-template-rows: 100vh;
+/*for displays that are super wide, greater than 1800px*/
   grid-template-columns: 35% 65%;
   grid-gap: 0px;
   margin: 0;
 }
 
-/*for less than super wide displays*/
+/*for displays that are less than or equal to 1800px*/
 @media screen and (max-width: 1800px) {
   .wrapper {
     grid-template-columns: 45% 55%;

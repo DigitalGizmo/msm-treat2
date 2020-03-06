@@ -566,15 +566,12 @@ blockquote {
 }
 
 .logo {
-  /*position: absolute;*/
   background-color: #DFDFD0;
   border: 1px solid #b3aa98;
   float: left;
-  /*padding: 3px;
-  z-index: 102;
-  top: 10px;
-  left: 10px;*/
+  margin-bottom: 0.25em;
   max-height: 40px;
+  padding: 3px;
 }
 
 </style>

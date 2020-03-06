@@ -93,41 +93,6 @@ export default {
     margin-top: -4px;
   }
 
-  .journal-info-panel {
-    background-color: rgba(53, 53, 36, 0.75);
-    border: 1px solid #b3aa98;
-    grid-row: 1;
-    grid-column: 1;
-    position: relative;
-    z-index: 15;
-    /*for super wide displays, greater than 1800px*/
-    padding: 2em 4em;
-  }
-
-  /*for medium displays, less than or equal to 1800px and greater than 1200px*/
-  @media screen and (max-width: 1800px) {
-    .journal-info-panel {
-      background-color: red;
-      padding: 1.6em 3em;
-    }
-  }
-
-  /*for small displays, less than or equal to 1200px and greater than 668px*/
-  @media screen and (max-width: 1200px) {
-    .journal-info-panel {
-      background-color: green;
-      padding: 1em;
-    }
-  }
-
-  /*for tiny displays, less than or equal to 668px*/
-  @media screen and (max-width: 668px) {
-    .journal-info-panel {
-      background-color: blue;
-      padding: 1em;
-    }
-  }
-
   .journal-info-panel h3 {
     font-size: 1.25em;
     font-variant: small-caps;
@@ -180,6 +145,43 @@ export default {
 
   header p {
     font-size: 1.25em;
+  }
+
+  .journal-info-panel {
+    background-color: rgba(53, 53, 36, 0.75);
+    border: 1px solid #b3aa98;
+    grid-row: 1;
+    grid-column: 1;
+    position: relative;
+    z-index: 15;
+    /*for super wide displays, greater than 1800px*/
+    padding: 2em 4em;
+  }
+
+  /*for medium displays, less than or equal to 1800px and greater than 1200px*/
+  @media screen and (max-width: 1800px) {
+    .journal-info-panel {
+      background-color: maroon;
+      padding: 1.6em 3em;
+    }
+  }
+
+  /*for small displays, less than or equal to 1200px and greater than 668px*/
+  @media screen and (max-width: 1200px) {
+    .journal-info-panel {
+      background-color: green;
+      font-size: 0.95em;
+      padding: 1em;
+    }
+  }
+
+  /*for tiny displays, less than or equal to 668px*/
+  @media screen and (max-width: 668px) {
+    .journal-info-panel {
+      background-color: navy;
+      font-size: 0.7em;
+      padding: 1em;
+    }
   }
 
 </style>

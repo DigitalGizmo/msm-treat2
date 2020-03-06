@@ -1,5 +1,6 @@
 <template>
     <section class="journal-info-panel">
+      <img src="images/msm-logo.gif" class="logo">
       <template v-if="entry.slug === 'intro'">
 
         <header class="intro">
@@ -80,13 +81,17 @@ export default {
 
 <style lang="scss">
 
-  .intro {
+/*  .intro {
     margin-top: 40px;
+  }*/
+
+  header {
+    clear: left;
   }
 
   .nav {
     color: #FFBF00;
-    text-align: right;
+    float: right;
     font-size: 1em;
     font-variant: small-caps;
     letter-spacing: .05em;

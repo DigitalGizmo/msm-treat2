@@ -37,9 +37,9 @@ export default {
       lightBoxOn: false,
       tempData: [],
       entries: [
-        { title: 'Joseph', slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>Joseph Treat set out </p>', interpret_blurb: 'text for the intro', interpret_more: '' }
+        { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
       ],
-      entry: { title: 'Joseph Treat&apos;s Journal', slug: 'intro', entry_date: '16 September, 1820', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>to explore </p>', interpret_blurb: 'place holder blurb', interpret_more: '' }
+      entry: { title: 'Traveling Through Maine', slug: 'intro', entry_date: 'date', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'text', interpret_more: '' }
     }
   },
   components: {

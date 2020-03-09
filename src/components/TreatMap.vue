@@ -48,7 +48,7 @@
             v-model="showGreenleaf"
             v-bind:value="true"
           />
-          <label for="one">1815 Map</label>
+          <label for="one">1820 Journey</label>
         </p>
         <p>
           <input
@@ -57,7 +57,7 @@
             v-model="showGreenleaf"
             v-bind:value="false"
           />
-          <label for="two">Present Day Map</label>
+          <label for="two">Present Day</label>
         </p>
         <!-- <p>
           <input
@@ -300,7 +300,7 @@ export default {
   .map-layers-controls {
     background-color: rgba(53, 53, 36, 0.8);
     border: 1px solid #b3aa98;
-    font-size: .8em;
+    font-size: .85em;
     padding: 1em 1.5em;
     position: absolute;
     right: 2%;
@@ -344,9 +344,30 @@ export default {
   input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
   }
+
   input[type="checkbox"], input[type="radio"] {
     box-sizing: border-box;
     padding: 0;
+  }
+
+  /*for medium displays, less than or equal to 1800px and greater than 1200px*/
+  @media screen and (max-width: 1800px) {
+    .map-layers-controls {
+      font-size: .75em;
+      padding: 0.75em 1em;
+    }
+  }
+
+  /*for small displays, less than or equal to 1200px and greater than 800px*/
+  @media screen and (max-width: 1200px) {
+    .map-layers-controls {
+      font-size: 0.5em;
+      padding: 0.5em;
+
+      img {
+        max-height: 24px;
+      }
+    }
   }
 
 </style>

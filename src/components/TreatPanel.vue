@@ -16,6 +16,7 @@
 
         <div class="intro-image">
           <img :src="'images/small/' + entry.slug + '.jpg'">
+          <h3><a @click="showLightBox">Credits</a></h3>
         </div>
 
       </template>
@@ -28,7 +29,7 @@
          <header>
             <h3>
               <a href="#"
-              v-on:click="reSetEntry(0)">Intro &bull; <span class="subtitle">Explore Joseph Treat&rsquo;s Journey</span></a>
+              v-on:click="reSetEntry(0)">Intro &bull; <span class="subtitle">Traveling Through Maine 200 Years Ago</span></a>
             </h3>
             <h1>{{ entry.title }}</h1>
             <p>{{ entry.entry_date }}</p>

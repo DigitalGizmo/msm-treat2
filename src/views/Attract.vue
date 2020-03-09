@@ -26,34 +26,51 @@
 </template>
 
 <script>
-import { TimelineLite, Power1 } from 'gsap'
+import { TimelineMax, Power1 } from 'gsap'
 
 export default {
   data () {
     return {
-      testparam: 'voila'
+      testparam: 'voila',
+      xEllipse: 50,
+      yEllipse: 800
     }
   },
   name: 'Attract',
   mounted () {
     const { map } = this.$refs
     const { panel } = this.$refs
-    const mapTimeline = new TimelineLite ()
-    const panelTimeline = new TimelineLite ()
+    const mapTimeline = new TimelineMax ()
+    const panelTimeline = new TimelineMax ()
 
-    mapTimeline.set(map, { x: 0 })
-    // mapTimeline.yoyo(true)
-    // gsap.timeline({repeat: 1, yoyo: true});
-    mapTimeline.from(map, 80, {
-      y: -1300,
-      repeat: -1, 
+    // try to make this act like the circle
+    // to see if progress 0.5 is working
+    mapTimeline.set(map, {
+      xPercent: 10, // 10
+      yPercent: 60 // 60
+      // x: -this.xEllipse,
+      // y: -this.yEllipse
+
+    })
+    mapTimeline.from(map, 70, {
+      yPercent: -60,
+      // y: this.yEllipse,
+      repeat: -1,
       yoyo: true,
       ease: Power1.easeInOut
     })
-    panelTimeline.set(panel, { x: 200, y: 200 })
-    panelTimeline.to(panel, 20, {
-      x: 400,
-    })
+    mapTimeline.to(map, 70, {
+      xPercent: -30,
+      // x: this.xEllipse,
+      repeat: -1,
+      yoyo: true,
+      ease: Power1.easeInOut
+    }).progress(0.5)
+    panelTimeline.set(panel, { x: 300, y: 200 })
+    // panelTimeline.set(panel, { x: '-100%' })
+    // panelTimeline.to(panel, 20, {
+    //   x: 400
+    // })
   }
 }
 </script>
@@ -61,12 +78,14 @@ export default {
 <style lang="scss">
 
   .map {
-    width: 100%;
+    width: 200%;
     position: absolute;
   }
 
   .attract-wrapper {
     background: #DFDFD0;
+    /*added by Don*/
+    /*height: 500;*/
   }
 
   .attract-panel {

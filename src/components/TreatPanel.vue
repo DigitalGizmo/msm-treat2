@@ -16,7 +16,7 @@
 
         <div class="intro-image">
           <img :src="'images/small/' + entry.slug + '.jpg'">
-          <h3><a @click="showLightBox">Credits</a></h3>
+          <h3><a @click="showCredits">Credits</a></h3>
         </div>
 
       </template>
@@ -40,8 +40,8 @@
         </div>
 
         <div class="journal-image">
-          <h3><a @click="showLightBox">View Treat&rsquo;s Journal Entry for This Site</a></h3>
-          <a @click="showLightBox"><img :src="'images/small/' + entry.slug + '.jpg'"></a>
+          <h3><a @click="showFullEntry">View Treat&rsquo;s Journal Entry for This Site</a></h3>
+          <a @click="showFullEntry"><img :src="'images/small/' + entry.slug + '.jpg'"></a>
         </div>
 
       </template>
@@ -63,7 +63,8 @@ export default {
     },
     incEntry: Function,
     reSetEntry: Function,
-    showLightBox: Function,
+    showFullEntry: Function,
+    showCredits: Function,
     currIndex: Number
   },
   methods: {

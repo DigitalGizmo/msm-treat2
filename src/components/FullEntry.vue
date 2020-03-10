@@ -1,10 +1,10 @@
 <template>
-  <div class="lightbox" @click.self="closeLightBox">
+  <div class="lightbox" @click.self="closeFullEntry">
     <div id="slimpop-wrapper">
 
       <header>
         <p class="close">
-          <a @click="closeLightBox">Close</a>
+          <a @click="closeFullEntry">Close</a>
         </p>
 
         <h2>Treat&rsquo;s Journal &bull; Site {{ currIndex }}</h2>
@@ -32,48 +32,13 @@ export default {
     entry: {
       type: Object
     },
-    closeLightBox: Function,
+    closeFullEntry: Function,
     currIndex: Number
   }
 }
 </script>
 
 <style lang="scss">
-  .lightbox {
-    position: fixed;
-    top: 0px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(../assets/overlay.png) repeat;
-    z-index: 99;
-  }
-
-  #slimpop-wrapper {
-    background-color: #eff0de;
-    border: 1px solid #b3aa98;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
-    color: #535442;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 2em;
-    height: 80%;
-    margin: 5% auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 1em 3em 3em 3em;
-    position: relative;
-    width: 60%;
-  }
-
-  /*for less than super wide displays*/
-  @media screen and (max-width: 1800px) {
-    #slimpop-wrapper {
-      height: 85%;
-      width: 85%;
-    }
-  }
 
   header {
     grid-column: 1 / 3;

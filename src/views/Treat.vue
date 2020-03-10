@@ -11,16 +11,21 @@
           :entry="entry"
           :incEntry="incrementEntry"
           :reSetEntry="setEntry"
-          :showLightBox="showLightBox"
+          :showFullEntry="showFullEntry"
+          :showCredits="showCredits"
           :currIndex="currIndex"
       ></treat-panel>
     </div>
     <full-entry
-      v-if="lightBoxOn"
+      v-if="fullEntryOn"
         :entry="entry"
-        :closeLightBox="closeLightBox"
+        :closeFullEntry="closeFullEntry"
         :currIndex="currIndex"
     ></full-entry>
+    <credits
+      v-if="creditsOn"
+        :closeCredits="closeCredits"
+    ></credits>
   </div>
 </template>
 
@@ -28,13 +33,15 @@
 import TreatPanel from '../components/TreatPanel.vue'
 import TreatMap from '../components/TreatMap.vue'
 import FullEntry from '../components/FullEntry.vue'
+import Credits from '../components/Credits.vue'
 import { eventBus } from '../main'
 
 export default {
   data: function () {
     return {
       currIndex: 0,
-      lightBoxOn: false,
+      fullEntryOn: false,
+      creditsOn: false,
       tempData: [],
       entries: [
         { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
@@ -45,7 +52,10 @@ export default {
   components: {
     treatPanel: TreatPanel,
     treatMap: TreatMap,
-    fullEntry: FullEntry
+    // In future, we should probably have one lightBox component here, in the parent
+    // and then that lightbox would have more than one possible child.
+    fullEntry: FullEntry,
+    credits: Credits
   },
   created () {
     // console.log('-- created')
@@ -69,11 +79,17 @@ export default {
       // Leaflet setView.
       eventBus.$emit('reSetView')
     },
-    showLightBox () {
-      this.lightBoxOn = true
+    showFullEntry () {
+      this.fullEntryOn = true
     },
-    closeLightBox () {
-      this.lightBoxOn = false
+    closeFullEntry () {
+      this.fullEntryOn = false
+    },
+    showCredits () {
+      this.creditsOn = true
+    },
+    closeCredits () {
+      this.creditsOn = false
     },
     fetchData () {
       // this.$http.get(process.env.VUE_APP_DATA_URL)
@@ -572,6 +588,44 @@ blockquote {
   margin-bottom: 0.25em;
   max-height: 40px;
   padding: 3px;
+}
+
+/*Moved lightbox and slimpop-wrapper here from FullEntry.vue*/
+
+.lightbox {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../assets/overlay.png) repeat;
+  z-index: 99;
+}
+
+#slimpop-wrapper {
+  background-color: #eff0de;
+  border: 1px solid #b3aa98;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
+  color: #535442;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 2em;
+  height: 80%;
+  margin: 5% auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1em 3em 3em 3em;
+  position: relative;
+  width: 60%;
+}
+
+/*for less than super wide displays*/
+@media screen and (max-width: 1800px) {
+  #slimpop-wrapper {
+    height: 85%;
+    width: 85%;
+  }
 }
 
 </style>

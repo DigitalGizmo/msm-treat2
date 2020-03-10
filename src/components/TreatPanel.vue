@@ -23,7 +23,10 @@
 
       <template v-else>
          <p class="nav">
-          <a @click="incEntry('prev')">&#8604; Previous</a> &bull; Site {{ currIndex }} &bull; <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
+          <a @click="incEntry('prev')">&#8604; Previous</a> &bull;
+          Site {{ currIndex }} &bull;
+          <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
+          <span v-else style="color:#bbb;">Next &#8605;</span>
         </p>
 
          <header>
@@ -50,13 +53,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      nextExists () {
-        return true
-      }
-    }
-  },
   props: {
     entry: {
       type: Object
@@ -65,6 +61,7 @@ export default {
     reSetEntry: Function,
     showFullEntry: Function,
     showCredits: Function,
+    nextExists: Boolean,
     currIndex: Number
   },
   methods: {

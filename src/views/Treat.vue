@@ -14,6 +14,7 @@
           :showFullEntry="showFullEntry"
           :showCredits="showCredits"
           :currIndex="currIndex"
+          :nextExists="nextExists"
       ></treat-panel>
     </div>
     <full-entry
@@ -44,9 +45,19 @@ export default {
       creditsOn: false,
       tempData: [],
       entries: [
-        { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
+        { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 47.5, lon: -69.5, zoom_level: 9, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
       ],
-      entry: { title: 'Traveling Through Maine', slug: 'intro', entry_date: 'date', lat: 46.15, lon: -68.767824, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'text', interpret_more: '' }
+      entry: { title: 'Traveling Through Maine', slug: 'intro', entry_date: 'date', lat: 50, lon: -60, zoom_level: 8.5, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'text', interpret_more: '' }
+    }
+  },
+  computed: {
+    nextExists () {
+      // console.log('-- this.entries.length: ' + this.entries.length)
+      if (this.currIndex < (this.entries.length - 1)) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   components: {
@@ -61,6 +72,11 @@ export default {
     // console.log('-- created')
     this.fetchData()
   },
+  // beforeMount () {
+  //   console.log('-- beforeMount, before entries, lat: ' + this.entry.lat)
+  //   this.entry = this.entries[0]
+  //   console.log('-- beforeMount, after entries, lat: ' + this.entry.lat)
+  // },
   methods: {
     incrementEntry: function (nextOrPrev) {
       if (nextOrPrev === 'next') {
@@ -93,6 +109,7 @@ export default {
     },
     fetchData () {
       // this.$http.get(process.env.VUE_APP_DATA_URL)
+      console.log('-- fetchData, before entries, lat: ' + this.entry.lat)
       this.$http.get(process.env.VUE_APP_BASE_DATA_URL +
         process.env.VUE_APP_DATA_PATH)
         .then(response => {
@@ -101,6 +118,7 @@ export default {
           // console.log('-- the response: ' + response.data[0].title)
         })
         .then(data => { this.entry = this.entries[0] })
+        .then(data => { this.setEntry(0) })
     }
   }
 }

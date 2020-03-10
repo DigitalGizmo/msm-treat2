@@ -7,7 +7,6 @@
         :center="initLocation"
         :options="mapOptions"
         :noBlockingAnimations="noBlocking"
-        name="Walter"
         ref="greenMap"
       >
         <l-tile-layer
@@ -70,10 +69,10 @@
       </div>
       <!-- custom zoom -->
       <h3>Map Zoom</h3>
-      <span @click="customZoom(1)">
+      <span @click="customZoom(0.5)">
         <img :src="'images/markers/zoom-in.jpg'">
       </span>
-      <span @click="customZoom(-1)">
+      <span @click="customZoom(-0.5)">
         <img :src="'images/markers/zoom-out.jpg'">
       </span>
       <!-- <p> <a @click="testMarkerRefs">test marker refs</a> </p> -->
@@ -109,17 +108,17 @@ export default {
   },
   data () {
     return {
-      zoom: 8.5,
-      currZoomLevel: 8,
+      zoom: 9,
+      currZoomLevel: 7,
       center: latLng(this.entry.lat, this.entry.lon),
       noBlocking: false,
-      offset: 0,
+      offset: 400,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
       path: '/assets/icons/',
-      initLocation: latLng(46.15, -68.76),
+      initLocation: latLng(46.49, -68.43), //-68.423
       currentZoom: 11.5,
       currentCenter: latLng(47.41322, -1.219482),
       showParagraph: false,
@@ -129,7 +128,7 @@ export default {
         touchZoom: true,
         dragging: true,
         tap: false,
-        minZoom: 7,
+        minZoom: 8.5,
         maxZoom: 11,
         maxBounds: [
           [43, -74], // southWest
@@ -191,7 +190,7 @@ export default {
   },
   mounted () {
     // Set offset for future use.
-    this.offset = this.$refs.greenMap.mapObject.getSize().x * 0.23
+    this.offset = this.$refs.greenMap.mapObject.getSize().x * 0.18
     console.log(' -- initial offset: ' + this.offset)
 
     // Recenter map initially.

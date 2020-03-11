@@ -627,30 +627,15 @@ blockquote {
   z-index: 99;
 }
 
+/* shared styles for journal and credits popups, specific styles in FullEntry.vue and Credits.vue */
 #slimpop-wrapper {
   background-color: #eff0de;
   border: 1px solid #b3aa98;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
   color: #535442;
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 2em;
-  height: 80%;
-  margin: 5% auto;
-  overflow-y: auto;
-  overflow-x: hidden;
   padding: 1em 3em 3em 3em;
   position: relative;
-  width: 60%;
-}
-
-/*for less than super wide displays*/
-@media screen and (max-width: 1800px) {
-  #slimpop-wrapper {
-    height: 85%;
-    width: 85%;
-  }
 }
 
 </style>

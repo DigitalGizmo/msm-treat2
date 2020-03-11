@@ -52,7 +52,7 @@ export default {
       // y: -this.yEllipse
 
     })
-    mapTimeline.from(map, 70, {
+    mapTimeline.from(map, 120, {
       yPercent: -60,
       // y: this.yEllipse,
       repeat: -1,

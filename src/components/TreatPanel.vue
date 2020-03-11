@@ -16,7 +16,7 @@
 
         <div class="intro-image">
           <img :src="'images/small/' + entry.slug + '.jpg'">
-          <h3><a @click="showCredits">Credits</a></h3>
+          <p><a @click="showCredits">Credits</a></p>
         </div>
 
       </template>

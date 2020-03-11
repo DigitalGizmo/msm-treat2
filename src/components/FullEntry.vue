@@ -1,6 +1,6 @@
 <template>
   <div class="lightbox" @click.self="closeFullEntry">
-    <div id="slimpop-wrapper">
+    <div id="slimpop-wrapper" class="entry-pop">
 
       <header>
         <p class="close">
@@ -11,16 +11,12 @@
         <h1>{{ entry.title }}</h1>
       </header>
 
-      <div class="entry-map">
-        <img :src="'images/large/' + entry.slug + '.jpg'">
-        <span v-html="entry.interpret_more"></span>
-      </div>
+      <img :src="'images/large/' + entry.slug + '.jpg'" class="entry-map">
+      <span v-html="entry.interpret_more" class="entry-map"></span>
 
-      <div class="entry-text">
-        <img :src="'images/ms/' + entry.slug + '.jpg'">
-          <h2>Journal Transcription</h2>
-          <span v-html="entry.entry_text"></span>
-      </div>
+      <img :src="'images/ms/' + entry.slug + '.jpg'" class="entry-text">
+      <h2 class="entry-text">Journal Transcription</h2>
+      <span v-html="entry.entry_text" class="entry-text"></span>
 
     </div><!-- /#slippop-wrapper -->
   </div><!-- /.lightbox -->
@@ -38,19 +34,29 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+/* shared styles for journal and credits popups in Treat.vue, specific styles here and Credits.vue */
+  .entry-pop {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 2em;
+    height: 80%;
+    margin: 5% auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 60%;
+  }
+
+  /*for less than super wide displays*/
+  @media screen and (max-width: 1800px) {
+    .entry-pop {
+      height: 85%;
+      width: 85%;
+    }
+  }
 
   header {
     grid-column: 1 / 3;
-    grid-row: 1;
-
-    h2 {
-      font-size: 1em;
-      font-variant: small-caps;
-      grid-column: 1;
-      letter-spacing: .05em;
-      margin: 0;
-    }
 
     h1 {
       font-size: 2.5em;
@@ -64,10 +70,9 @@ export default {
       font-variant: small-caps;
       grid-column: 2;
       letter-spacing: .05em;
-      position: sticky;
+      position: absolute;
       top: 1em;
-      right: 1em;
-      text-align: right;
+      right: 2em;
     }
 
     .close a {
@@ -75,37 +80,36 @@ export default {
     }
   }
 
-  .entry-map {
-    grid-column: 1 / 3;
-    grid-row: 2;
+  h2 {
+    font-size: 1em;
+    font-variant: small-caps;
+    grid-column: 1;
+    letter-spacing: .05em;
+    margin: 0;
   }
 
   .entry-map img {
-    grid-column: 1 / 2;
+    grid-column: 1;
     grid-row: 2;
   }
 
   .entry-map span p {
-    grid-column: 2 / 3;
+    grid-column: 2;
     grid-row: 2;
   }
 
-  .entry-text {
-    grid-column: 1 / 3;
-    grid-row: 3;
-  }
-
   .entry-text img {
-    grid-column: 1 / 2;
+    grid-column: 1;
     grid-row: 3;
   }
 
-  .entry-text h2, .entry-text span p {
-    grid-column: 2 / 3;
+  h2.entry-text, span.entry-text {
+    grid-column: 2;
     grid-row: 3;
   }
 
-  .entry-text span p {
+  span.entry-text p {
+    margin-top: 1em;
     font-style: italic;
   }
 

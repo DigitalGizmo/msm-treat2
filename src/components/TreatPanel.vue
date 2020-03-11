@@ -23,7 +23,8 @@
 
       <template v-else>
          <p class="nav">
-          <a @click="incEntry('prev')">&#8604; Previous</a> &bull;
+          <a v-if="prevExists"  @click="incEntry('prev')">&#8604; Previous</a>
+          <span v-else style="color:#bbb;">&#8604; Previous</span> &bull;
           Site {{ currIndex }} &bull;
           <a v-if="nextExists" @click="incEntry('next')" >Next &#8605;</a>
           <span v-else style="color:#bbb;">Next &#8605;</span>
@@ -62,6 +63,7 @@ export default {
     showFullEntry: Function,
     showCredits: Function,
     nextExists: Boolean,
+    prevExists: Boolean,
     currIndex: Number
   },
   methods: {

@@ -66,11 +66,20 @@ export default {
     //   yoyo: true,
     //   ease: Power1.easeInOut
     // }).progress(0.5)
-    panelTimeline.set(panel, { x: 300, y: 200 })
+    panelTimeline.set(panel, {
+      x: 300,
+      y: 200,
+      autoAlpha: 0
+    })
     // panelTimeline.set(panel, { x: '-100%' })
     // panelTimeline.to(panel, 20, {
     //   x: 400
     // })
+    panelTimeline.to(panel, 5, { autoAlpha: 1, repeat: 1, yoyo: true })
+      .set(panel, { x: 400 })
+      panelTimeline.to(panel, 5, { autoAlpha: 1 })
+
+    // master timeline? move, then repeat?
   }
 }
 </script>

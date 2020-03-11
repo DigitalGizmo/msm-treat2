@@ -15,6 +15,7 @@
           :showCredits="showCredits"
           :currIndex="currIndex"
           :nextExists="nextExists"
+          :prevExists="prevExists"
       ></treat-panel>
     </div>
     <full-entry
@@ -52,8 +53,14 @@ export default {
   },
   computed: {
     nextExists () {
-      // console.log('-- this.entries.length: ' + this.entries.length)
       if (this.currIndex < (this.entries.length - 1)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    prevExists () {
+      if (this.currIndex > 1) {
         return true
       } else {
         return false

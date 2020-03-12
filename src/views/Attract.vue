@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { TimelineLite, Power1 } from 'gsap'
+import { TimelineMax, Power1 } from 'gsap'
 
 export default {
   data () {
@@ -40,8 +40,8 @@ export default {
   mounted () {
     const { map } = this.$refs
     const { panel } = this.$refs
-    const mapTimeline = new TimelineLite ()
-    const panelTimeline = new TimelineLite ()
+    const mapTimeline = new TimelineMax ()
+    const panelTimeline = new TimelineMax ()
 
     // try to make this act like the circle
     // to see if progress 0.5 is working

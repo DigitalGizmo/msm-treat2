@@ -128,7 +128,7 @@ export default {
         touchZoom: true,
         dragging: true,
         tap: false,
-        minZoom: 8.5,
+        minZoom: 8,
         maxZoom: 11,
         maxBounds: [
           [43, -74], // southWest

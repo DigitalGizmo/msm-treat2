@@ -1,9 +1,9 @@
 <template>
-  <div class="attract-wrapper">
-    <div class="map">
+  <div class="attract-wrapper" @click="leaveAttract">
+    <div class="map" @click="leaveAttract">
       <img ref="map" :src="'images/big-bg.jpg'" alt="map">
     </div>
-    <section ref="panel" class="attract-panel">
+    <section ref="panel" class="attract-panel" @click="leaveAttract">
       <div class="border">
         <article class="attract-text">
             <h1>
@@ -31,57 +31,108 @@ import { TimelineMax, Power1 } from 'gsap'
 export default {
   data () {
     return {
-      testparam: 'voila',
-      xEllipse: 50,
-      yEllipse: 800
+      startX: 200
     }
   },
   name: 'Attract',
+  computed: {
+    deltaX () {
+      return this.startX + Math.floor(Math.random() * 400)
+    }
+  },
+  methods: {
+    leaveAttract () {
+      console.log('-- got to leaveAttract')
+      this.$router.push('/')
+    }
+  },
   mounted () {
     const { map } = this.$refs
     const { panel } = this.$refs
     const mapTimeline = new TimelineMax ()
+    // const masterPanelTimeline = new TimelineMax ({ repeat: 5 })
     const panelTimeline = new TimelineMax ()
+    // const startX = 200
 
-    // try to make this act like the circle
-    // to see if progress 0.5 is working
+    // Map scrolling up and down
     mapTimeline.set(map, {
-      // xPercent: 10, // 10
-      //yPercent: 60 // 60
       y: 0,
       x: 0
-      // x: -this.xEllipse,
-      // y: -this.yEllipse
-
     })
-    mapTimeline.from(map, 120, {
-      yPercent: -60,
-      // y: this.yEllipse,
+    mapTimeline.to(map, 120, {
+      yPercent: -50,
       repeat: -1,
       yoyo: true,
       ease: Power1.easeInOut
     })
-    // mapTimeline.to(map, 70, {
-    //   xPercent: -30,
-    //   // x: this.xEllipse,
-    //   repeat: -1,
-    //   yoyo: true,
-    //   ease: Power1.easeInOut
-    // }).progress(0.5)
-    panelTimeline.set(panel, {
-      x: 300,
-      y: 200,
-      autoAlpha: 0
-    })
-    // panelTimeline.set(panel, { x: '-100%' })
-    // panelTimeline.to(panel, 20, {
-    //   x: 400
-    // })
-    panelTimeline.to(panel, 5, { autoAlpha: 1, repeat: 1, yoyo: true })
-      .set(panel, { x: 400 })
-      panelTimeline.to(panel, 5, { autoAlpha: 1 })
 
-    // master timeline? move, then repeat?
+    // Panel fading in and out with moves between
+    panelTimeline.set(panel, {
+      x: this.startX,
+      y: 200,
+      opacity: 0
+    })
+
+    // var tl = new TimelineMax({ repeat: 3 })
+    //   tl.fromTo(panel, 3, { autoAlpha: 0 }, { autoAlpha: 1 })
+    //     .to(panel, 1, { x: '+=100' })
+
+    // myTimeline.fromTo(element, 1, {left:0, opacity:1}, {left:100, opacity:0.5});
+
+    // panelTimeline.fromTo(panel, 3, { autoAlpha: 0 }, { autoAlpha: 1 })
+    //   .set(panel, { x: '+=100' })
+
+    // function panelOnOff () {
+    //   var tl = new TimelineMax(0)
+    //   tl.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 })
+    //   return tl;
+    // }
+    // function panelMove () {
+    //   var tl = new TimelineMax(0)
+    //   tl.set(panel, { x: '+=100' })
+    //   return tl;
+    // }
+
+    // masterPanelTimeline.add(panelOnOff())
+    //   .add(panelMove())
+
+    var tl = new TimelineMax({ repeat: -1 })
+    tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
+    tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
+    tl.set(panel, { xPercent: 20, yPercent: 25 })
+    tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
+    tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
+    tl.set(panel, { xPercent: 40, yPercent: 15 })
+    tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
+    tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
+    tl.set(panel, { xPercent: 30, yPercent: 20 })
+
+    // var tl = new TimelineMax({ repeat: 3, repeatDelay: 1 });
+    // tl.to(panel, 2, { autoAlpha: 1 });
+    // tl.to(panel, 2, { autoAlpha: 0 },2);
+    // tl.to(panel, 2, panel, { x: startX + Math.floor(Math.random() * 400) }, 4);
+
+    // masterPanelTimeline.add(panelTimeline.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 }),
+    // masterPanelTimeline.add(panelTimeline.set(panel, { x: startX + Math.floor(Math.random() * 200) }, 2));
+
+    // panelTimeline.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 })
+
+    // panelTimeline.set(panel, { x: startX + Math.floor(Math.random() * 200) })
+
+    // panelTimeline.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 })
+
+    // panelTimeline.set(panel, { x: startX + Math.floor(Math.random() * 200) })
+
+    // panelTimeline.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 })
+
+    // panelTimeline.set(panel, { x: startX + Math.floor(Math.random() * 200) })
+
+    // panelTimeline.fromTo(panel, 2, { autoAlpha: 0 }, { autoAlpha: 1 })
+    //   .set(panel, { x: '+=100' })
+
+    // masterPanelTimeline.to(panel, 3, { autoAlpha: 0, yoyo: true })
+    //   .set(panel, { x: '+=100' })
+    // panelTimeline.to(panel, 5, { autoAlpha: 1 })
   }
 }
 </script>

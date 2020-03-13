@@ -31,7 +31,7 @@ import { TimelineMax, Power1 } from 'gsap'
 export default {
   data () {
     return {
-      startX: 200
+      startX: 600
     }
   },
   name: 'Attract',
@@ -60,7 +60,7 @@ export default {
       x: 0
     })
     mapTimeline.to(map, 120, {
-      yPercent: -50,
+      yPercent: -40,
       repeat: -1,
       yoyo: true,
       ease: Power1.easeInOut
@@ -69,7 +69,7 @@ export default {
     // Panel fading in and out with moves between
     panelTimeline.set(panel, {
       x: this.startX,
-      y: 200,
+      y: 150,
       opacity: 0
     })
 
@@ -99,13 +99,13 @@ export default {
     var tl = new TimelineMax({ repeat: -1 })
     tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
     tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
-    tl.set(panel, { xPercent: 20, yPercent: 25 })
+    tl.set(panel, { x: 620, y: 170 })
     tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
     tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
-    tl.set(panel, { xPercent: 40, yPercent: 15 })
+    tl.set(panel, { x: 590, y: 200 })
     tl.to(panel, 10, { autoAlpha: 1, ease: Power1.easeOut })
     tl.to(panel, 10, { autoAlpha: 0, ease: Power1.easeIn })
-    tl.set(panel, { xPercent: 30, yPercent: 20 })
+    tl.set(panel, { x: 630, y: 180 })
 
     // var tl = new TimelineMax({ repeat: 3, repeatDelay: 1 });
     // tl.to(panel, 2, { autoAlpha: 1 });
@@ -151,13 +151,13 @@ export default {
   .attract-panel {
     background-color: rgba(53, 53, 36, 0.8);
     padding: 3px;
-    width: 50%;
+    width: 675px;
     position: absolute;
   }
 
   .border {
     border: 1px solid #b3aa98;
-    padding: 4em;
+    padding: 3em;
   }
 
   .attract-text {

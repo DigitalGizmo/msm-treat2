@@ -150,7 +150,7 @@ export default {
   }
 
   .journal-info-panel {
-    background-color: rgba(53, 53, 36, 0.75);
+    background-color: rgba(53, 53, 36, 0.85);
     border: 1px solid #b3aa98;
     grid-row: 1;
     grid-column: 1;

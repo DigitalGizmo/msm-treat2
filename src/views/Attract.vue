@@ -47,7 +47,9 @@ export default {
     // to see if progress 0.5 is working
     mapTimeline.set(map, {
       // xPercent: 10, // 10
-      yPercent: 60 // 60
+      //yPercent: 60 // 60
+      y: 0,
+      x: 0
       // x: -this.xEllipse,
       // y: -this.yEllipse
 
@@ -87,21 +89,18 @@ export default {
 <style lang="scss">
 
   .map {
-    width: 200%;
     position: absolute;
   }
 
   .attract-wrapper {
-    background: #DFDFD0;
-    /*added by Don*/
-    /*height: 500;*/
+    background: #eff0de;
+    overflow-y: hidden;
   }
 
   .attract-panel {
     background-color: rgba(53, 53, 36, 0.8);
     padding: 3px;
     width: 50%;
-    /*don wuz here*/
     position: absolute;
   }
 

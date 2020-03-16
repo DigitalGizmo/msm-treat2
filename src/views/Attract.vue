@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import { TimelineMax, Power1 } from 'gsap'
+// Need to import from 'gsap/dist/gsap' rather than from 'gsap'
+import { TimelineMax, Power1 } from 'gsap/dist/gsap'
 
 export default {
   data () {
@@ -49,9 +50,9 @@ export default {
   mounted () {
     const { map } = this.$refs
     const { panel } = this.$refs
-    const mapTimeline = new TimelineMax ()
+    const mapTimeline = new TimelineMax()
     // const masterPanelTimeline = new TimelineMax ({ repeat: 5 })
-    const panelTimeline = new TimelineMax ()
+    const panelTimeline = new TimelineMax()
     // const startX = 200
 
     // Map scrolling up and down
@@ -63,7 +64,8 @@ export default {
       yPercent: -40,
       repeat: -1,
       yoyo: true,
-      ease: Power1.easeInOut
+      ease: 'none'
+      // ease: Power1.easeInOut
     })
 
     // Panel fading in and out with moves between

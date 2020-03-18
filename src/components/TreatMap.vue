@@ -24,17 +24,6 @@
             :geojson="geojson"
             :options="geoOptions"
         />
-        <l-marker
-            v-for="(item, index) in entries"
-            :key="index"
-            :lat-lng="latAndLng(item.lat, item.lon)"
-            :icon="customIcon"
-            :visible="markerVisibility(index)"
-            @click="goMarker(item, index)"
-            ref="markersRef"
-            >
-            <l-tooltip>{{ index }}: {{ item.title }}</l-tooltip>
-        </l-marker>
       </l-map>
     <div class="map-layers-controls">
       <div class="layers">
@@ -81,8 +70,9 @@
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker, LTooltip, LGeoJson } from 'vue2-leaflet'
-import { latLng, icon, Point } from 'leaflet'
+import { LMap, LTileLayer, LGeoJson } from 'vue2-leaflet'
+// import { latLng, icon, Point } from 'leaflet'
+import L from 'leaflet'
 import { eventBus } from '../main'
 
 export default {
@@ -90,8 +80,6 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker,
-    LTooltip,
     LGeoJson
   },
   props: {
@@ -110,7 +98,7 @@ export default {
     return {
       zoom: 9,
       currZoomLevel: 7,
-      center: latLng(this.entry.lat, this.entry.lon),
+      center: L.latLng(this.entry.lat, this.entry.lon),
       noBlocking: false,
       offset: 400,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -118,9 +106,9 @@ export default {
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
       path: '/assets/icons/',
-      initLocation: latLng(46.49, -68.43), //-68.423
+      initLocation: L.latLng(46.49, -68.43),
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
+      currentCenter: L.latLng(47.41322, -1.219482),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
@@ -136,7 +124,9 @@ export default {
         ]
       },
       showGreenleaf: true,
-      treatIcon: icon({
+      testMarker: null,
+      // icon: new L.NumberedDivIcon({ number: '1' }),
+      treatIcon: L.icon({
         iconUrl: 'images/markers/treat-marker-icon-2x.png',
         iconSize: [25, 41], // size of the icon
         shadowSize: [40, 54], // size of the shadow
@@ -144,7 +134,7 @@ export default {
         shadowAnchor: [4, 62], // the same for the shadow
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       }),
-      selectedIcon: icon({
+      selectedIcon: L.icon({
         iconUrl: 'images/markers/hilite-treat-marker-icon-2x.png',
         iconSize: [25, 41], // size of the icon
         shadowSize: [40, 54], // size of the shadow
@@ -194,7 +184,7 @@ export default {
     console.log(' -- initial offset: ' + this.offset)
 
     // Recenter map initially.
-    this.$refs.greenMap.mapObject.panBy(new Point(-this.offset, 0), { animate: false })
+    this.$refs.greenMap.mapObject.panBy(new L.Point(-this.offset, 0), { animate: false })
     // Listen for resetting center
     eventBus.$on('reSetView', () => {
       // Using native setView as Vue2Leaflet encounters a
@@ -202,7 +192,7 @@ export default {
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
       this.$nextTick(() => {
-        this.$refs.greenMap.mapObject.setViewOffset(latLng(this.entry.lat,
+        this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)
       })
     }) // end eventBus on
@@ -213,12 +203,33 @@ export default {
     // Set zoom to Admin entry
     this.zoom = this.entries[0].zoom_level
 
-    // // Attempt at marker access for highlighting
-    // this.$nextTick(() => {
-    //   this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
-    //   // console.log('marker ref: ' + this.$refs.markersRef[0])
-    //   // this.$refs[0].markersRef
-    // })
+    // this.testMarker = L.marker([46.49, -68.43], { icon: this.treatIcon })
+    // this.testMarker.addTo(this.$refs.greenMap.mapObject)
+
+    // L.marker([46.49, -68.43], { icon: this.treatIcon }).addTo(this.$refs.greenMap.mapObject)
+
+    eventBus.$on('dataReady', () => {
+      // Create markers "by hand" with $ref -- vue2leaflet doesn't allow
+      // enough custom handling of the icons
+      // Need to wait until data is ready to creat markers
+      // BTW, don't need $nextTick since we're already waiting for dataReady
+      this.entries.forEach((jrnEntry, index) => {
+        // console.log('-- lat, index: ' + jrnEntry.lat + ', ' + index)
+        L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
+        // L.marker([jrnEntry.lat, jrnEntry.lon], {
+        //   icon: new L.NumberedDivIcon({ number: '1' })
+        // })
+          .addTo(this.$refs.greenMap.mapObject)
+          .on('click', e => {
+            // console.log(" - marker name: " + feature.name);
+            // mapApp.clearHighlights();
+            // feature.markerObject.setIcon(mapApp.selectedIcon);
+            this.goMarker(jrnEntry, index)
+          }) // end pm click
+        // const myTestMarker = L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
+        // myTestMarker.addTo(this.$refs.greenMap.mapObject)
+      })
+    }) // end eventBus on
   },
   methods: {
     customZoom (increment) {
@@ -227,13 +238,13 @@ export default {
       // Need to use full setViewOffset rather than just setZoom, in
       // order to keep the offset.
       // Receive a 1 or -1 argument.
-      this.$refs.greenMap.mapObject.setViewOffset(latLng(this.entry.lat,
+      this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
         this.entry.lon), [this.offset, 0],
       this.$refs.greenMap.mapObject.getZoom() + increment)
     },
     latAndLng (pLat, pLng) {
-      // return latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
-      return latLng(pLat, pLng)
+      // return L.latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
+      return L.latLng(pLat, pLng)
     },
     goMarker (item, index) {
       console.log('-- reseting item: ' + item.title + ', index: ' + index)
@@ -283,6 +294,18 @@ export default {
 </script>
 
 <style lang="scss">
+
+  .leaflet-div-icon {
+    background: transparent;
+    border: none;
+  }
+  .leaflet-marker-icon .number{
+    position: relative;
+    top: -37px;
+    font-size: 12px;
+    width: 25px;
+    text-align: center;
+  }
 
   .map-wrapper {
     grid-row: 1;

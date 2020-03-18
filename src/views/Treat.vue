@@ -126,6 +126,7 @@ export default {
         })
         .then(data => { this.entry = this.entries[0] })
         .then(data => { this.setEntry(0) })
+        .then(data => { eventBus.$emit('dataReady') })
     }
   }
 }

@@ -215,19 +215,28 @@ export default {
       // BTW, don't need $nextTick since we're already waiting for dataReady
       this.entries.forEach((jrnEntry, index) => {
         // console.log('-- lat, index: ' + jrnEntry.lat + ', ' + index)
-        L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
-        // L.marker([jrnEntry.lat, jrnEntry.lon], {
-        //   icon: new L.NumberedDivIcon({ number: '1' })
-        // })
-          .addTo(this.$refs.greenMap.mapObject)
-          .on('click', e => {
-            // console.log(" - marker name: " + feature.name);
-            // mapApp.clearHighlights();
-            // feature.markerObject.setIcon(mapApp.selectedIcon);
-            this.goMarker(jrnEntry, index)
-          }) // end pm click
-        // const myTestMarker = L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
-        // myTestMarker.addTo(this.$refs.greenMap.mapObject)
+        // L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
+        if (index > 0) {
+          L.marker([jrnEntry.lat, jrnEntry.lon], {
+            icon: new L.DivIcon({
+              className: 'icon-div',
+              html: '<img class="icon-image" src="images/markers/treat-marker-icon-2x.png"/>' +
+                '<span class="icon-number">' + index + '</span>'
+            })
+          })
+          // L.marker([jrnEntry.lat, jrnEntry.lon], {
+          //   icon: new L.NumberedDivIcon({ number: '1' })
+          // })
+            .addTo(this.$refs.greenMap.mapObject)
+            .on('click', e => {
+              // console.log(" - marker name: " + feature.name);
+              // mapApp.clearHighlights();
+              // feature.markerObject.setIcon(mapApp.selectedIcon);
+              this.goMarker(jrnEntry, index)
+            }) // end pm click
+          // const myTestMarker = L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
+          // myTestMarker.addTo(this.$refs.greenMap.mapObject)
+        }
       })
     }) // end eventBus on
   },
@@ -295,16 +304,22 @@ export default {
 
 <style lang="scss">
 
-  .leaflet-div-icon {
+  .icon-div {
     background: transparent;
     border: none;
-  }
-  .leaflet-marker-icon .number{
-    position: relative;
-    top: -37px;
-    font-size: 12px;
     width: 25px;
-    text-align: center;
+    height: 40px;
+  }
+  .icon-image{
+    position: absolute;
+    width: 25px;
+    top: -40px;
+  }
+
+  .icon-number{
+    position: absolute;
+    left: 8px;
+    top: -37px;
   }
 
   .map-wrapper {

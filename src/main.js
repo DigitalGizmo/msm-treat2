@@ -35,10 +35,10 @@ Vue.component('l-marker', LMarker)
 //     iconSize: new L.Point(25, 4),
 //     iconAnchor: new L.Point(13, 41),
 //     popupAnchor: new L.Point(0, -33),
-    
+
 //     iconAnchor: (Point)
 //     popupAnchor: (Point)
-    
+
 //     className: 'leaflet-div-icon'
 //   },
 

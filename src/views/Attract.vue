@@ -1,9 +1,9 @@
 <template>
   <div class="attract-wrapper" @click="leaveAttract">
-    <div class="map" @click="leaveAttract">
+    <div class="map">
       <img ref="map" :src="'images/big-bg.jpg'" alt="map">
     </div>
-    <section ref="panel" class="attract-panel" @click="leaveAttract">
+    <section ref="panel" class="attract-panel">
       <div class="border">
         <article class="attract-text">
             <h1>

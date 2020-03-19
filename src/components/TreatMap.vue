@@ -64,7 +64,6 @@
       <span @click="customZoom(-0.5)">
         <img :src="'images/markers/zoom-out.jpg'">
       </span>
-      <!-- <p> <a @click="testMarkerRefs">test marker refs</a> </p> -->
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
 </template>
@@ -125,25 +124,8 @@ export default {
       },
       showGreenleaf: true,
       testMarker: null,
-      // icon: new L.NumberedDivIcon({ number: '1' }),
-      treatIcon: L.icon({
-        iconUrl: 'images/markers/treat-marker-icon-2x.png',
-        iconSize: [25, 41], // size of the icon
-        shadowSize: [40, 54], // size of the shadow
-        iconAnchor: [15, 54], // point of the icon which will correspond to marker's location
-        shadowAnchor: [4, 62], // the same for the shadow
-        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-      }),
-      selectedIcon: L.icon({
-        iconUrl: 'images/markers/hilite-treat-marker-icon-2x.png',
-        iconSize: [25, 41], // size of the icon
-        shadowSize: [40, 54], // size of the shadow
-        iconAnchor: [15, 54], // point of the icon which will correspond to marker's location
-        shadowAnchor: [4, 62], // the same for the shadow
-        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-      }),
-      customIcon: null,
-      markerObjects: null,
+      prevSelected: 0,
+      markerList: [null],
       geojson: {
         type: 'FeatureCollection',
         name: 'TreatPat-4326',
@@ -196,18 +178,11 @@ export default {
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)
       })
     }) // end eventBus on
-
-    // set initial markers
-    this.customIcon = this.treatIcon
-
     // Set zoom to Admin entry
     this.zoom = this.entries[0].zoom_level
 
-    // this.testMarker = L.marker([46.49, -68.43], { icon: this.treatIcon })
-    // this.testMarker.addTo(this.$refs.greenMap.mapObject)
-
     // L.marker([46.49, -68.43], { icon: this.treatIcon }).addTo(this.$refs.greenMap.mapObject)
-
+    this.markerList = []
     eventBus.$on('dataReady', () => {
       // Create markers "by hand" with $ref -- vue2leaflet doesn't allow
       // enough custom handling of the icons
@@ -217,30 +192,36 @@ export default {
         // console.log('-- lat, index: ' + jrnEntry.lat + ', ' + index)
         // L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
         if (index > 0) {
-          L.marker([jrnEntry.lat, jrnEntry.lon], {
-            icon: new L.DivIcon({
-              className: 'icon-div',
-              html: '<img class="icon-image" src="images/markers/treat-marker-icon-2x.png"/>' +
-                '<span class="icon-number">' + index + '</span>'
-            })
+          this.markerList.push(L.marker([jrnEntry.lat, jrnEntry.lon], {
+            icon: this.defaultIcon(index)
           })
           // L.marker([jrnEntry.lat, jrnEntry.lon], {
           //   icon: new L.NumberedDivIcon({ number: '1' })
           // })
             .addTo(this.$refs.greenMap.mapObject)
             .on('click', e => {
-              // console.log(" - marker name: " + feature.name);
-              // mapApp.clearHighlights();
-              // feature.markerObject.setIcon(mapApp.selectedIcon);
               this.goMarker(jrnEntry, index)
-            }) // end pm click
-          // const myTestMarker = L.marker([jrnEntry.lat, jrnEntry.lon], { icon: this.treatIcon })
-          // myTestMarker.addTo(this.$refs.greenMap.mapObject)
-        }
-      })
+            }) // end on click
+          ) // end push
+        } // end if > 0
+      }) // end forEach
     }) // end eventBus on
   },
   methods: {
+    defaultIcon (index) {
+      return new L.DivIcon({
+        className: 'icon-div',
+        html: '<img class="icon-image" src="images/markers/treat-marker-icon-2x.png"/>' +
+          '<span class="icon-number">' + index + '</span>'
+      })
+    },
+    selectedIcon (index) {
+      return new L.DivIcon({
+        className: 'icon-div',
+        html: '<img class="icon-image" src="images/markers/hilite-treat-marker-icon-2x.png"/>' +
+          '<span class="icon-number-selected">' + index + '</span>'
+      })
+    },
     customZoom (increment) {
       // console.log(" - current zoom: " + this.$refs["greenMap"].mapObject.getZoom());
 
@@ -256,47 +237,18 @@ export default {
       return L.latLng(pLat, pLng)
     },
     goMarker (item, index) {
-      console.log('-- reseting item: ' + item.title + ', index: ' + index)
-
-      // Added property of entry approach to marker access for selected
-      // if (this.currentItem) {
-      //   this.currentItem.icon = this.treatIcon
-      // }
-      // this.currentItem = item
-      // console.log('-- curr item icon: ' + item.icon)
-      // this.currentItem.icon = this.selectedIcon
-
-      // index approach
-      // this.markerObjects[index].icon = this.selectedIcon
-      // this.markerObjects[index].openTooltip()
-
-      this.reSetEntry(index)
-    },
-    markerVisibility (index) {
-      if (index === 0) {
-        return false
-      } else {
-        return true
+      // console.log('-- reseting item: ' + item.title + ', index: ' + index)
+      // Index is - 1 because we omitted 0 from the marker list
+      this.markerList[index - 1].setIcon(this.selectedIcon(index))
+      // Reset previously selected to default (if there's been a previous selectiom)
+      if (this.prevSelected > 0) {
+        this.markerList[this.prevSelected - 1].setIcon(this.defaultIcon(this.prevSelected))
       }
+      this.prevSelected = index
+      this.reSetEntry(index)
     },
     innerClick () {
       alert('Click!')
-    },
-    testMarkerRefs () {
-      console.log('got to testMarkerRefs')
-      // Attempt at marker access for highlighting
-      // this.$nextTick(() => {
-      //   // this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
-      console.log('marker ref: ' + this.$refs.markersRef[0].pane)
-
-      // this.$refs.markersRef[0].visible = false
-
-      this.$refs.markersRef[1].icon = this.selectedIcon
-      //   // this.$refs[0].markersRef
-      // })
-      // this.markerObjects = this.$refs.markersRef.map(ref => ref.mapObject)
-      // console.log(' marker obj: ' + this.markerObjects[1].open)
-      // this.markerObjects[index].openTooltip()
     }
   }
 }
@@ -320,6 +272,13 @@ export default {
     position: absolute;
     left: 8px;
     top: -37px;
+  }
+
+  .icon-number-selected{
+    position: absolute;
+    left: 8px;
+    top: -37px;
+    color: black;
   }
 
   .map-wrapper {

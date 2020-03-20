@@ -215,14 +215,16 @@ export default {
       return new L.DivIcon({
         className: 'icon-div',
         html: '<img class="icon-image" src="images/markers/treat-marker-icon-2x.png"/>' +
-          '<span class="icon-number">' + index + '</span>'
+          '<span class="icon-number">' + index + '</span>',
+        iconAnchor: [8, 46]
       })
     },
     selectedIcon (index) {
       return new L.DivIcon({
         className: 'icon-div',
         html: '<img class="icon-image" src="images/markers/hilite-treat-marker-icon-2x.png"/>' +
-          '<span class="icon-number-selected">' + index + '</span>'
+          '<span class="icon-number-selected">' + index + '</span>',
+        iconAnchor: [8, 46]
       })
     },
     customZoom (increment) {
@@ -260,27 +262,27 @@ export default {
 <style lang="scss">
 
   .icon-div {
-    background: transparent;
-    border: none;
+    /*background: transparent;
+    border-style: solid;
+    border-width: thick;*/
     width: 25px;
     height: 40px;
   }
   .icon-image{
     position: absolute;
     width: 25px;
-    top: -40px;
   }
 
   .icon-number{
     position: absolute;
     left: 8px;
-    top: -37px;
+    top: 3px;
   }
 
   .icon-number-selected{
     position: absolute;
     left: 8px;
-    top: -37px;
+    top: 3px;
     color: black;
   }
 

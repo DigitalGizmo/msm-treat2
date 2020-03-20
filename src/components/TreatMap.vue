@@ -162,6 +162,7 @@ export default {
   },
   mounted () {
     // Set offset for future use.
+    console.log('-- TreatMap mounted')
     this.offset = this.$refs.greenMap.mapObject.getSize().x * 0.18
     console.log(' -- initial offset: ' + this.offset)
 
@@ -169,13 +170,15 @@ export default {
     this.$refs.greenMap.mapObject.panBy(new L.Point(-this.offset, 0), { animate: false })
     // Listen for resetting center
     eventBus.$on('reSetView', (index) => {
+      // console.log('-- TreatMap.vue reSetView (data ready)')
       // Set Marker highlight
-      // + 1 bcz goMarker subtracts 1
-      this.goMarker(index)
+      // Avoid trying to set marker for intro 0
+      if (index > 0) { this.goMarker(index) }
       // Using native setView as Vue2Leaflet encounters a
       // bug in Leaflet -- can't animate both pan and zoom
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
+      console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)
@@ -215,7 +218,9 @@ export default {
       return new L.DivIcon({
         className: 'icon-div',
         html: '<img class="icon-image" src="images/markers/treat-marker-icon-2x.png"/>' +
-          '<span class="icon-number">' + index + '</span>',
+        '<div class="inner-div">' +
+        '<span class="icon-number">' + index + '</span>' +
+        '</div>',
         iconAnchor: [8, 46]
       })
     },
@@ -223,7 +228,9 @@ export default {
       return new L.DivIcon({
         className: 'icon-div',
         html: '<img class="icon-image" src="images/markers/hilite-treat-marker-icon-2x.png"/>' +
-          '<span class="icon-number-selected">' + index + '</span>',
+          '<div class="inner-div">' +
+          '<span class="icon-number-selected">' + index + '</span>' +
+          '</div>',
         iconAnchor: [8, 46]
       })
     },
@@ -261,29 +268,30 @@ export default {
 
 <style lang="scss">
 
-  .icon-div {
-    /*background: transparent;
-    border-style: solid;
+  .inner-div {
+    position: absolute;
+    background: transparent;
+    /*border-style: solid;
     border-width: thick;*/
+    top: 3px;
+    left: -1px;
     width: 25px;
     height: 40px;
+    text-align: center;
   }
   .icon-image{
     position: absolute;
     width: 25px;
   }
 
-  .icon-number{
+ /* .icon-number{
     position: absolute;
     left: 8px;
     top: 3px;
   }
-
+*/
   .icon-number-selected{
-    position: absolute;
-    left: 8px;
-    top: 3px;
-    color: black;
+    color: #C64C17;
   }
 
   .map-wrapper {

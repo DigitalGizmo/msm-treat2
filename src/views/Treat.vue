@@ -76,7 +76,7 @@ export default {
     credits: Credits
   },
   created () {
-    // console.log('-- created')
+    console.log('-- Treat.vue created')
     this.fetchData()
   },
   // beforeMount () {

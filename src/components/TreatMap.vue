@@ -168,7 +168,10 @@ export default {
     // Recenter map initially.
     this.$refs.greenMap.mapObject.panBy(new L.Point(-this.offset, 0), { animate: false })
     // Listen for resetting center
-    eventBus.$on('reSetView', () => {
+    eventBus.$on('reSetView', (index) => {
+      // Set Marker highlight
+      // + 1 bcz goMarker subtracts 1
+      this.goMarker(index)
       // Using native setView as Vue2Leaflet encounters a
       // bug in Leaflet -- can't animate both pan and zoom
       // Also using custom offset. Uses prototype in main.js.
@@ -177,7 +180,7 @@ export default {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)
       })
-    }) // end eventBus on
+    }) // end eventBus on reSetView
     // Set zoom to Admin entry
     this.zoom = this.entries[0].zoom_level
 
@@ -200,7 +203,7 @@ export default {
           // })
             .addTo(this.$refs.greenMap.mapObject)
             .on('click', e => {
-              this.goMarker(jrnEntry, index)
+              this.reSetEntry(index)
             }) // end on click
           ) // end push
         } // end if > 0
@@ -236,7 +239,7 @@ export default {
       // return L.latLng(this.entry.lat -0.5, this.entry.lon - 0.5)
       return L.latLng(pLat, pLng)
     },
-    goMarker (item, index) {
+    goMarker (index) {
       // console.log('-- reseting item: ' + item.title + ', index: ' + index)
       // Index is - 1 because we omitted 0 from the marker list
       this.markerList[index - 1].setIcon(this.selectedIcon(index))
@@ -245,7 +248,7 @@ export default {
         this.markerList[this.prevSelected - 1].setIcon(this.defaultIcon(this.prevSelected))
       }
       this.prevSelected = index
-      this.reSetEntry(index)
+      // this.reSetEntry(index)
     },
     innerClick () {
       alert('Click!')

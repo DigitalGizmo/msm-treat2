@@ -100,7 +100,7 @@ export default {
       // In Vue2 Leaflet we can't pan and zoom at the same time,
       // so here's an event to trigger use of the native
       // Leaflet setView.
-      eventBus.$emit('reSetView')
+      eventBus.$emit('reSetView', newEntIndex)
     },
     showFullEntry () {
       this.fullEntryOn = true

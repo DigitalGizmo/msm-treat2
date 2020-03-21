@@ -1,6 +1,6 @@
 <template>
 
-  <div class="map-wrapper">
+  <div class="map-wrapper" >
       <l-map
         id="mapdiv"
         :zoom="zoom"
@@ -91,7 +91,8 @@ export default {
     reSetEntry: {
       type: Function
     },
-    currIndex: Number
+    currIndex: Number,
+    dataOnBoard: Boolean
   },
   data () {
     return {

@@ -6,6 +6,7 @@
           :entries="entries"
           :reSetEntry="setEntry"
           :currIndex="currIndex"
+          :dataOnBoard="dataOnBoard"
       ></treat-map>
       <treat-panel
           :entry="entry"
@@ -44,7 +45,7 @@ export default {
       currIndex: 0,
       fullEntryOn: false,
       creditsOn: false,
-      tempData: [],
+      dataOnBoard: false,
       entries: [
         { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 47.5, lon: -69.5, zoom_level: 9, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
       ],
@@ -79,11 +80,10 @@ export default {
     console.log('-- Treat.vue created')
     this.fetchData()
   },
-  // beforeMount () {
-  //   console.log('-- beforeMount, before entries, lat: ' + this.entry.lat)
-  //   this.entry = this.entries[0]
-  //   console.log('-- beforeMount, after entries, lat: ' + this.entry.lat)
-  // },
+  watch: {
+    // call again the method if the route changes
+    $route: 'fetchData'
+  },
   methods: {
     incrementEntry: function (nextOrPrev) {
       if (nextOrPrev === 'next') {
@@ -124,9 +124,10 @@ export default {
           this.entries = response.data
           // console.log('-- the response: ' + response.data[0].title)
         })
-        .then(data => { this.entry = this.entries[0] })
-        .then(data => { this.setEntry(0) })
-        .then(data => { eventBus.$emit('dataReady') })
+        // .then(data => { this.entry = this.entries[0] })
+        .then(data => { this.setEntry(0) }) // set init data & view, used often
+        .then(data => { this.dataOnBoard = true }) // hold map render until true
+        .then(data => { eventBus.$emit('dataReady') }) // make markers once
     }
   }
 }

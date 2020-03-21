@@ -4,6 +4,7 @@
 
       <header>
         <p class="close">
+          <a v-if="entry.is_flippable" @click="flipDrawing">flip drawing |</a> 
           <a @click="closeFullEntry">Close</a>
         </p>
 
@@ -11,8 +12,8 @@
         <h1>{{ entry.title }}</h1>
       </header>
 
-      <img :src="'images/large/' + entry.slug + '.jpg'" class="entry-map">
-      <span v-html="entry.interpret_more" class="entry-map"></span>
+      <img :src="'images/large/' + imgname + '.jpg'" class="entry-map">
+       <span v-html="entry.interpret_more" class="entry-map"></span>
 
       <img :src="'images/ms/' + entry.slug + '.jpg'" class="entry-text">
       <h2 class="entry-text">Journal Transcription</h2>
@@ -29,7 +30,9 @@ export default {
       type: Object
     },
     closeFullEntry: Function,
-    currIndex: Number
+    currIndex: Number,
+    imgname: String,
+    flipDrawing: Function
   }
 }
 </script>

@@ -2,21 +2,23 @@
   <div>
     <div class="wrapper">
       <treat-map
-          :entry="entry"
-          :entries="entries"
-          :reSetEntry="setEntry"
-          :currIndex="currIndex"
-          :dataOnBoard="dataOnBoard"
+        :entry="entry"
+        :entries="entries"
+        :reSetEntry="setEntry"
+        :currIndex="currIndex"
+        :dataOnBoard="dataOnBoard"
       ></treat-map>
       <treat-panel
-          :entry="entry"
-          :incEntry="incrementEntry"
-          :reSetEntry="setEntry"
-          :showFullEntry="showFullEntry"
-          :showCredits="showCredits"
-          :currIndex="currIndex"
-          :nextExists="nextExists"
-          :prevExists="prevExists"
+        :entry="entry"
+        :incEntry="incrementEntry"
+        :reSetEntry="setEntry"
+        :showFullEntry="showFullEntry"
+        :showCredits="showCredits"
+        :currIndex="currIndex"
+        :nextExists="nextExists"
+        :prevExists="prevExists"
+        :imgname="imgname"
+        :flipDrawing="flipDrawing"
       ></treat-panel>
     </div>
     <full-entry
@@ -24,6 +26,8 @@
         :entry="entry"
         :closeFullEntry="closeFullEntry"
         :currIndex="currIndex"
+        :imgname="imgname"
+        :flipDrawing="flipDrawing"
     ></full-entry>
     <credits
       v-if="creditsOn"
@@ -46,6 +50,7 @@ export default {
       fullEntryOn: false,
       creditsOn: false,
       dataOnBoard: false,
+      imgname: null, // TreatPanel loads before data ready
       entries: [
         { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 47.5, lon: -69.5, zoom_level: 9, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
       ],
@@ -97,6 +102,8 @@ export default {
       this.currIndex = newEntIndex
       // Update data to contain new journal entry
       this.entry = this.entries[this.currIndex]
+      // Also update image name which is independent for flipImage
+      this.imgname = this.entry.slug
       // In Vue2 Leaflet we can't pan and zoom at the same time,
       // so here's an event to trigger use of the native
       // Leaflet setView.
@@ -128,6 +135,19 @@ export default {
         .then(data => { this.setEntry(0) }) // set init data & view, used often
         .then(data => { this.dataOnBoard = true }) // hold map render until true
         .then(data => { eventBus.$emit('dataReady') }) // make markers once
+    },
+    flipDrawing () {
+      console.log(' -- flippable : ')
+      // See if name already ends with _flip
+      if (this.imgname.substring(this.imgname.length - 5, this.imgname.length) === '_flip') {
+        // ends with _flip
+        // console.log(' -- trimmed name: ' + this.imgname.substring(0, this.imgname.length - 5));
+        this.imgname = this.imgname.substring(0, this.imgname.length - 5)
+      } else {
+        // doesn't end with _flip
+        this.imgname = this.imgname + '_flip'
+      }
+      // console.log(' -- flip new name: ' + this.imgname);
     }
   }
 }

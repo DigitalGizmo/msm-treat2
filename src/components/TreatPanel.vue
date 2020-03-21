@@ -2,7 +2,6 @@
     <section class="journal-info-panel">
       <img src="images/msm-logo.gif" class="logo">
       <template v-if="entry.slug === 'intro'">
-
         <header class="intro">
           <h3>Introduction</h3>
           <h1>{{ entry.title }}</h1>
@@ -10,15 +9,13 @@
 
         <div class="intro-text">
           <span v-html="entry.interpret_blurb"></span>
+          <p>Tap or click a marker to choose a site or <a href="#" v-on:click="incEntry('next')">&ldquo;BEGIN EXPLORING&rdquo;&nbsp;</a>to start at the journey&rsquo;s beginning.</p>
         </div><!-- /journal-text -->
 
-        <h3><a href = "#" v-on:click = "incEntry('next')">Begin Exploring</a></h3>
-
         <div class="intro-image">
-          <img :src="'images/small/' + entry.slug + '.jpg'">
+          <img :src="'images/small/' + imgname + '.jpg'">
           <p><a @click="showCredits">Credits</a></p>
         </div>
-
       </template>
 
       <template v-else>
@@ -30,14 +27,14 @@
           <span v-else style="color:#bbb;">Next &#8605;</span>
         </p>
 
-         <header>
-            <h3>
-              <a href="#"
-              v-on:click="reSetEntry(0)">Intro &bull; <span class="subtitle">Traveling Through Maine 200 Years Ago</span></a>
-            </h3>
-            <h1>{{ entry.title }}</h1>
-            <p>{{ entry.entry_date }}</p>
-          </header>
+        <header>
+          <h3>
+            <a href="#"
+            v-on:click="reSetEntry(0)">Intro &bull; <span class="subtitle">Traveling Through Maine 200 Years Ago</span></a>
+          </h3>
+          <h1>{{ entry.title }}</h1>
+          <p>{{ entry.entry_date }}</p>
+        </header>
 
         <div class="journal-text">
           <span v-html="entry.interpret_blurb"></span>
@@ -45,9 +42,11 @@
 
         <div class="journal-image">
           <h3><a @click="showFullEntry">View Treat&rsquo;s Journal Entry for This Site</a></h3>
-          <a @click="showFullEntry"><img :src="'images/small/' + entry.slug + '.jpg'"></a>
+          <a @click="showFullEntry"><img :src="'images/small/' + imgname + '.jpg'"></a>
+          <p v-if="entry.is_flippable">
+            <a href = "#" @click="flipDrawing">flip drawing</a>
+          </p>
         </div>
-
       </template>
     </section>
 </template>
@@ -64,17 +63,13 @@ export default {
     showCredits: Function,
     nextExists: Boolean,
     prevExists: Boolean,
-    currIndex: Number
+    currIndex: Number,
+    imgname: String,
+    flipDrawing: Function
   },
   methods: {
-    // @click="countTouches($event)"
-    // countTouches (e) {
-    //   // var x = event.targetTouches.length;
-    //   console.log(' num target touches: ' + e.targetTouches.length)
-    //   console.log(' num target name: ' + e.target.getAttribute('class'))
-    // }
-  }
-}
+  } // end methods
+} // end export default
 // Could have method here that operat on prop as
 // and on any data item Udemy section 8- 110
 

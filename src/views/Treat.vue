@@ -6,7 +6,6 @@
         :entries="entries"
         :reSetEntry="setEntry"
         :currIndex="currIndex"
-        :dataOnBoard="dataOnBoard"
       ></treat-map>
       <treat-panel
         :entry="entry"
@@ -49,7 +48,6 @@ export default {
       currIndex: 0,
       fullEntryOn: false,
       creditsOn: false,
-      dataOnBoard: false,
       imgname: null, // TreatPanel loads before data ready
       entries: [
         { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 47.5, lon: -69.5, zoom_level: 9, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
@@ -133,7 +131,6 @@ export default {
         })
         // .then(data => { this.entry = this.entries[0] })
         .then(data => { this.setEntry(0) }) // set init data & view, used often
-        .then(data => { this.dataOnBoard = true }) // hold map render until true
         .then(data => { eventBus.$emit('dataReady') }) // make markers once
     },
     flipDrawing () {

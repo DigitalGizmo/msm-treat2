@@ -58,11 +58,11 @@
       </div>
       <!-- custom zoom -->
       <h3>Map Zoom</h3>
-      <span @click="customZoom(0.5)">
-        <img :src="'images/markers/zoom-in.jpg'">
-      </span>
       <span @click="customZoom(-0.5)">
         <img :src="'images/markers/zoom-out.jpg'">
+      </span>
+      <span @click="customZoom(0.5)">
+        <img :src="'images/markers/zoom-in.jpg'">
       </span>
     </div> <!-- map layers controls -->
   </div> <!-- map wrapper -->
@@ -91,25 +91,18 @@ export default {
     reSetEntry: {
       type: Function
     },
-    currIndex: Number,
-    dataOnBoard: Boolean
+    currIndex: Number
   },
   data () {
     return {
       zoom: 9,
-      currZoomLevel: 7,
-      center: L.latLng(this.entry.lat, this.entry.lon),
       noBlocking: false,
       offset: 400,
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      zoomOffset: 0,
+      // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      // greenleaf: '/dist/assets/tiles/{z}/{x}/{y}.png',
-      path: '/assets/icons/',
-      initLocation: L.latLng(46.49, -68.43),
-      currentZoom: 11.5,
-      currentCenter: L.latLng(47.41322, -1.219482),
-      showParagraph: false,
+      initLocation: L.latLng(46.25, -68.8), // hard-wired to match data
       mapOptions: {
         zoomSnap: 0.5,
         zoomControl: false,
@@ -163,10 +156,18 @@ export default {
   },
   mounted () {
     // Set offset for future use.
-    console.log('-- TreatMap mounted')
+    // console.log('-- TreatMap mounted')
     this.offset = this.$refs.greenMap.mapObject.getSize().x * 0.18
     console.log(' -- initial offset: ' + this.offset)
-
+    console.log(' -- total map (viewport) width: ' + this.$refs.greenMap.mapObject.getSize().x)
+    // Determine size for conditional zoom level
+    if (window.matchMedia('(max-width: 1600px)').matches) {
+      console.log(' -- viewport is less than 1600px')
+      this.zoomOffset = 0
+    } else {
+      console.log(' -- viewport is greater than 1600px')
+      this.zoomOffset = 1
+    }
     // Recenter map initially.
     this.$refs.greenMap.mapObject.panBy(new L.Point(-this.offset, 0), { animate: false })
     // Listen for resetting center
@@ -182,11 +183,11 @@ export default {
       // console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
-          this.entry.lon), [this.offset, 0], this.entry.zoom_level)
+          this.entry.lon), [this.offset, 0], this.entry.zoom_level + this.zoomOffset)
       })
     }) // end eventBus on reSetView
     // Set zoom to Admin entry
-    this.zoom = this.entries[0].zoom_level
+    // this.zoom = this.entries[0].zoom_level
 
     // L.marker([46.49, -68.43], { icon: this.treatIcon }).addTo(this.$refs.greenMap.mapObject)
     this.markerList = []

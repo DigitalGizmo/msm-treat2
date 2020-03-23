@@ -43,8 +43,8 @@
         <div class="journal-image">
           <h3><a @click="showFullEntry">View Treat&rsquo;s Journal Entry for This Site</a></h3>
           <a @click="showFullEntry"><img :src="'images/small/' + imgname + '.jpg'"></a>
-          <p v-if="entry.is_flippable">
-            <a href = "#" @click="flipDrawing">flip drawing</a>
+          <p v-if="entry.is_flippable" class="flippable">
+            <a href = "#" @click="flipDrawing">Flip Map</a>
           </p>
         </div>
       </template>
@@ -115,9 +115,17 @@ export default {
 
     img {
       border: 1px solid #b3aa98;
-      padding: 2px;
+      float: left;
+      margin-right: 1em;
       max-height: 100%;
+      padding: 2px;
     }
+  }
+
+  p.flippable {
+    font-variant: small-caps;
+    letter-spacing: .05em;
+    padding-top: 1em;
   }
 
   .journal-text {

@@ -4,7 +4,6 @@
 
       <header>
         <p class="close">
-          <a v-if="entry.is_flippable" @click="flipDrawing">flip drawing | </a>
           <a @click="closeFullEntry">Close</a>
         </p>
 
@@ -13,8 +12,12 @@
       </header>
 
       <img :src="'images/large/' + imgname + '.jpg'" class="entry-map">
-       <span v-html="entry.interpret_more" class="entry-map"></span>
 
+      <div class="entry-map">
+        <span v-html="entry.interpret_more"></span>
+        <a v-if="entry.is_flippable" @click="flipDrawing" class="flip">Flip Map</a>
+      </div>
+      
       <img :src="'images/ms/' + entry.slug + '.jpg'" class="entry-text">
       <h2 class="entry-text">Journal Transcription</h2>
       <span v-html="entry.entry_text" class="entry-text"></span>
@@ -83,7 +86,7 @@ export default {
     }
   }
 
-  h2 {
+  h2, a.flip {
     font-size: 1em;
     font-variant: small-caps;
     grid-column: 1;
@@ -91,12 +94,16 @@ export default {
     margin: 0;
   }
 
-  .entry-map img {
+  a.flip {
+    color: #C64C17;
+  }
+
+  img.entry-map {
     grid-column: 1;
     grid-row: 2;
   }
 
-  .entry-map span p {
+  div.entry-map {
     grid-column: 2;
     grid-row: 2;
   }

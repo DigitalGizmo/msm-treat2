@@ -179,7 +179,7 @@ export default {
       // bug in Leaflet -- can't animate both pan and zoom
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
-      console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
+      // console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level)

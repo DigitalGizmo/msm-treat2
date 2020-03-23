@@ -4,7 +4,7 @@
 
       <header>
         <p class="close">
-          <a v-if="entry.is_flippable" @click="flipDrawing">flip drawing |</a> 
+          <a v-if="entry.is_flippable" @click="flipDrawing">flip drawing | </a>
           <a @click="closeFullEntry">Close</a>
         </p>
 

@@ -1,6 +1,6 @@
 <template>
     <section class="journal-info-panel">
-      <img src="images/msm-logo.gif" class="logo">
+      <a :href="logoLink"><img src="images/msm-logo.gif" class="logo"></a>
       <template v-if="entry.slug === 'intro'">
         <header class="intro">
           <h3>Introduction</h3>
@@ -67,11 +67,12 @@ export default {
     imgname: String,
     flipDrawing: Function
   },
-  methods: {
-  } // end methods
+  computed: {
+    logoLink () {
+      return process.env.VUE_APP_LOGO_URL
+    }
+  }
 } // end export default
-// Could have method here that operat on prop as
-// and on any data item Udemy section 8- 110
 
 </script>
 

@@ -98,13 +98,13 @@ export default {
       zoom: 9,
       noBlocking: false,
       offset: 400,
-      zoomOffset: 0,
+      zoomOffset: 0.25,
       // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       initLocation: L.latLng(46.25, -68.8), // hard-wired to match data
       mapOptions: {
-        zoomSnap: 0.5,
+        zoomSnap: 0.25,
         zoomControl: false,
         touchZoom: true,
         dragging: true,
@@ -159,14 +159,17 @@ export default {
     // console.log('-- TreatMap mounted')
     this.offset = this.$refs.greenMap.mapObject.getSize().x * 0.18
     console.log(' -- initial offset: ' + this.offset)
-    console.log(' -- total map (viewport) width: ' + this.$refs.greenMap.mapObject.getSize().x)
+    console.log(' -- total map width: ' + this.$refs.greenMap.mapObject.getSize().x)
+    console.log(' -- total viewport width: ' + window.innerWidth)
     // Determine size for conditional zoom level
-    if (window.matchMedia('(max-width: 1600px)').matches) {
-      console.log(' -- viewport is less than 1600px')
-      this.zoomOffset = 0
+    if (window.matchMedia('(max-width: 1800px)').matches) {
+      // Viewport less than 1800
+      console.log(' -- viewport is less than 1800px')
+      this.zoomOffset = -1
     } else {
-      console.log(' -- viewport is greater than 1600px')
-      this.zoomOffset = 1
+      // Viewport greater than 1800
+      console.log(' -- viewport is greater than 1800px')
+      this.zoomOffset = 0.5
     }
     // Recenter map initially.
     this.$refs.greenMap.mapObject.panBy(new L.Point(-this.offset, 0), { animate: false })
@@ -181,6 +184,8 @@ export default {
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
       // console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
+      console.log(' - zoomOffset: ' + this.zoomOffset)
+      console.log(' - setting zoom to: ' + (this.entry.zoom_level + this.zoomOffset))
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level + this.zoomOffset)

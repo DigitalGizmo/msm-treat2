@@ -98,7 +98,7 @@ export default {
       zoom: 9,
       noBlocking: false,
       offset: 400,
-      zoomOffset: 0.25,
+      zoomOffset: 0.5,
       // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -165,7 +165,7 @@ export default {
     if (window.matchMedia('(max-width: 1800px)').matches) {
       // Viewport less than 1800
       console.log(' -- viewport is less than 1800px')
-      this.zoomOffset = -1
+      this.zoomOffset = -0.25
     } else {
       // Viewport greater than 1800
       console.log(' -- viewport is greater than 1800px')
@@ -178,14 +178,23 @@ export default {
       // console.log('-- TreatMap.vue reSetView (data ready)')
       // Set Marker highlight
       // Avoid trying to set marker for intro 0
-      if (index > 0) { this.goMarker(index) }
+      if (index > 0) {
+        this.goMarker(index)
+      } else {
+        // Returning to intro
+        if (this.prevSelected > 0) {
+          // But only reset if a marker has been selected
+          this.markerList[this.prevSelected - 1].setIcon(this.defaultIcon(this.prevSelected))
+        }
+      }
       // Using native setView as Vue2Leaflet encounters a
       // bug in Leaflet -- can't animate both pan and zoom
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
       // console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
-      console.log('- entry.zoom_level: ' + this.entry.zoom_level + ', zoomOffset: ' + this.zoomOffset)
-      console.log(' - setting zoom to: ' + (this.entry.zoom_level + this.zoomOffset))
+      // console.log('- index: ' + index)
+      // console.log('- entry.zoom_level: ' + this.entry.zoom_level + ', zoomOffset: ' + this.zoomOffset)
+      // console.log(' - setting zoom to: ' + (this.entry.zoom_level + this.zoomOffset))
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
           this.entry.lon), [this.offset, 0], this.entry.zoom_level + this.zoomOffset)

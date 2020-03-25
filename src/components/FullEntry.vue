@@ -2,11 +2,11 @@
   <div class="lightbox" @click.self="closeFullEntry">
     <div id="slimpop-wrapper" class="entry-pop">
 
-      <header>
         <p class="close">
           <a @click="closeFullEntry">Close</a>
         </p>
 
+      <header>
         <h2>Treat&rsquo;s Journal &bull; Site {{ currIndex }}</h2>
         <h1>{{ entry.title }}</h1>
       </header>
@@ -43,9 +43,13 @@ export default {
 <style lang="scss" scoped>
 /* shared styles for journal and credits popups in Treat.vue, specific styles here and Credits.vue */
   .entry-pop {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    display: grid;
     grid-gap: 2em;
+    grid-template:
+      "a b" auto
+      "c d" auto
+      "e f" auto /
+      1fr 1fr;
     height: 80%;
     margin: 5% auto;
     overflow-y: auto;
@@ -62,34 +66,18 @@ export default {
   }
 
   header {
-    grid-column: 1 / 3;
+    grid-area: a;
 
     h1 {
       font-size: 2.5em;
       font-style: italic;
-      grid-column: 1;
       margin: 0;
-    }
-
-    .close {
-      font-size: 1em;
-      font-variant: small-caps;
-      grid-column: 2;
-      letter-spacing: .05em;
-      position: absolute;
-      top: 1em;
-      right: 2em;
-    }
-
-    .close a {
-      color: #C64C17;
     }
   }
 
   h2, a.flip {
     font-size: 1em;
     font-variant: small-caps;
-    grid-column: 1;
     letter-spacing: .05em;
     margin: 0;
   }
@@ -98,24 +86,32 @@ export default {
     color: #C64C17;
   }
 
+  p.close {
+    font-size: 1em;
+    font-variant: small-caps;
+    letter-spacing: .05em;
+    grid-area: b;
+    text-align: right;
+  }
+
+  .close a {
+    color: #C64C17;
+  }
+
   img.entry-map {
-    grid-column: 1;
-    grid-row: 2;
+    grid-area: c;
   }
 
   div.entry-map {
-    grid-column: 2;
-    grid-row: 2;
+    grid-area: d;
   }
 
-  .entry-text img {
-    grid-column: 1;
-    grid-row: 3;
+  img.entry-text {
+    grid-area: e;
   }
 
   h2.entry-text, span.entry-text {
-    grid-column: 2;
-    grid-row: 3;
+    grid-area: f;
   }
 
   span.entry-text p {

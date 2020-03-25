@@ -19,8 +19,11 @@
       </div>
 
       <img :src="'images/ms/' + entry.slug + '.jpg'" class="entry-text">
-      <h2 class="entry-text">Journal Transcription</h2>
-      <span v-html="entry.entry_text" class="entry-text"></span>
+
+      <div class="entry-text">
+        <h2>Journal Transcription</h2>
+        <span v-html="entry.entry_text"></span>
+      </div>
 
     </div><!-- /#slippop-wrapper -->
   </div><!-- /.lightbox -->
@@ -110,7 +113,7 @@ export default {
     grid-area: e;
   }
 
-  h2.entry-text, span.entry-text {
+  div.entry-text {
     grid-area: f;
   }
 

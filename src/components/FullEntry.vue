@@ -17,7 +17,7 @@
         <span v-html="entry.interpret_more"></span>
         <a v-if="entry.is_flippable" @click="flipDrawing" class="flip">Flip Map</a>
       </div>
-      
+
       <img :src="'images/ms/' + entry.slug + '.jpg'" class="entry-text">
       <h2 class="entry-text">Journal Transcription</h2>
       <span v-html="entry.entry_text" class="entry-text"></span>

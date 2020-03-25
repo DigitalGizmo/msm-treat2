@@ -52,7 +52,7 @@ export default {
       entries: [
         { title: 'Joseph', slug: 'intro', entry_date: 'date', lat: 47.5, lon: -69.5, zoom_level: 9, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'intro text', interpret_more: '' }
       ],
-      entry: { title: 'Traveling Through Maine', slug: 'intro', entry_date: 'date', lat: 50, lon: -60, zoom_level: 8.5, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'text', interpret_more: '' }
+      entry: { title: 'Traveling Through Maine', slug: 'intro', entry_date: 'date', lat: 50, lon: -60, zoom_level: 8, is_flippable: false, entry_text: '<p>text</p>', interpret_blurb: 'text', interpret_more: '' }
     }
   },
   computed: {
@@ -151,7 +151,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* changed #mapdiv to .mapdiv or not */
 article,
 aside,
 details,

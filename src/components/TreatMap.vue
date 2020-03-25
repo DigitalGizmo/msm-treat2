@@ -184,7 +184,7 @@ export default {
       // Also using custom offset. Uses prototype in main.js.
       // Per VueLeaflet doc on API, need to wait until data registers
       // console.log('-- reSetView (dataReady) nextTick set position for index: ' + index)
-      console.log(' - zoomOffset: ' + this.zoomOffset)
+      console.log('- entry.zoom_level: ' + this.entry.zoom_level + ', zoomOffset: ' + this.zoomOffset)
       console.log(' - setting zoom to: ' + (this.entry.zoom_level + this.zoomOffset))
       this.$nextTick(() => {
         this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,

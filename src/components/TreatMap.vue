@@ -206,6 +206,9 @@ export default {
     // L.marker([46.49, -68.43], { icon: this.treatIcon }).addTo(this.$refs.greenMap.mapObject)
     this.markerList = []
     eventBus.$on('dataReady', () => {
+      // Fix leaflet tile issue due to div size not being defined well enough
+      // This needs to be done only once, so here on the single dataReady
+      this.$refs.greenMap.mapObject.invalidateSize(true)
       // Create markers "by hand" with $ref -- vue2leaflet doesn't allow
       // enough custom handling of the icons
       // Need to wait until data is ready to creat markers

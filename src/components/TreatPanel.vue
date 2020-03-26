@@ -6,11 +6,12 @@
           <h3>Introduction</h3>
           <h1>{{ entry.title }}</h1>
         </header>
+          
+          <div class="journal-text">
+            <span v-html="entry.interpret_blurb"></span>
+          </div>
 
-        <div class="intro-text">
-          <span v-html="entry.interpret_blurb"></span>
           <p>Tap or click a marker to choose a site or <a href="#" v-on:click="incEntry('next')">&ldquo;BEGIN EXPLORING&rdquo;&nbsp;</a>to start at the journey&rsquo;s beginning.</p>
-        </div><!-- /journal-text -->
 
         <div class="intro-image">
           <img :src="'images/small/' + imgname + '.jpg'">
@@ -106,7 +107,8 @@ export default {
 
   .intro-image img {
     border: 1px solid #b3aa98;
-    max-width: 75%;
+    max-height: 35%;
+    max-width: 60%;
     padding: 2px;
   }
 
@@ -145,7 +147,7 @@ export default {
 
   header h1 {
     font-style: italic;
-    font-size: 2.75em;
+    font-size: 2.5em;
     margin: 0;
   }
 

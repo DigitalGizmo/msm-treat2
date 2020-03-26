@@ -206,9 +206,22 @@ export default {
     // L.marker([46.49, -68.43], { icon: this.treatIcon }).addTo(this.$refs.greenMap.mapObject)
     this.markerList = []
     eventBus.$on('dataReady', () => {
+      // Set map view and content to intro, 0
+      // (otherwise we seem to start with hard-wired data above)
+      // console.log(' in dataReady reSetEntry')
+      this.reSetEntry(0)
       // Fix leaflet tile issue due to div size not being defined well enough
       // This needs to be done only once, so here on the single dataReady
-      this.$refs.greenMap.mapObject.invalidateSize(true)
+      // this.$nextTick(() => {
+      //   this.$refs.greenMap.mapObject.invalidateSize(true)
+      // })
+      // setTimeout(100) {
+      //   this.$refs.greenMap.mapObject.invalidateSize(true)
+      // }
+      setTimeout(() => {
+        // console.log('-- invalidateSize')
+        this.$refs.greenMap.mapObject.invalidateSize(true)
+      }, 500)
       // Create markers "by hand" with $ref -- vue2leaflet doesn't allow
       // enough custom handling of the icons
       // Need to wait until data is ready to creat markers
@@ -220,9 +233,6 @@ export default {
           this.markerList.push(L.marker([jrnEntry.lat, jrnEntry.lon], {
             icon: this.defaultIcon(index)
           })
-          // L.marker([jrnEntry.lat, jrnEntry.lon], {
-          //   icon: new L.NumberedDivIcon({ number: '1' })
-          // })
             .addTo(this.$refs.greenMap.mapObject)
             .on('click', e => {
               this.reSetEntry(index)

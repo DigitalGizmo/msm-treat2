@@ -127,11 +127,11 @@ export default {
         .then(response => {
           // return response
           this.entries = response.data
-          // console.log('-- the response: ' + response.data[0].title)
         })
-        // .then(data => { this.entry = this.entries[0] })
-        .then(data => { this.setEntry(0) }) // set init data & view, used often
-        .then(data => { eventBus.$emit('dataReady') }) // make markers once
+        // start off with intro, index 0
+        .then(data => { this.entry = this.entries[0] })
+        // one-time setup
+        .then(data => { eventBus.$emit('dataReady') })
     },
     flipDrawing () {
       console.log(' -- flippable : ')

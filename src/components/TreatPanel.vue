@@ -6,12 +6,11 @@
           <h3>Introduction</h3>
           <h1>{{ entry.title }}</h1>
         </header>
-          
-          <div class="journal-text">
-            <span v-html="entry.interpret_blurb"></span>
-          </div>
 
-          <p>Tap or click a marker to choose a site or <a href="#" v-on:click="incEntry('next')">&ldquo;BEGIN EXPLORING&rdquo;&nbsp;</a>to start at the journey&rsquo;s beginning.</p>
+        <div class="journal-text">
+          <span v-html="entry.interpret_blurb"></span>
+        </div>
+        <p>Tap or click a marker to choose a site or <a href="#" v-on:click="incEntry('next')">&ldquo;BEGIN EXPLORING&rdquo;&nbsp;</a>to start at the journey&rsquo;s beginning.</p>
 
         <div class="intro-image">
           <img :src="'images/small/' + imgname + '.jpg'">

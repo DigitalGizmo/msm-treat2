@@ -610,7 +610,7 @@ blockquote {
 
 .wrapper {
   display: grid;
-  grid-template-rows: 100%;
+  grid-template-rows: 100vh;
 /*for displays that are super wide, greater than 1800px*/
   grid-template-columns: 35% 65%;
   /*grid-gap: 0px;*/

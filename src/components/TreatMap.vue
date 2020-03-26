@@ -210,18 +210,6 @@ export default {
       // (otherwise we seem to start with hard-wired data above)
       // console.log(' in dataReady reSetEntry')
       this.reSetEntry(0)
-      // Fix leaflet tile issue due to div size not being defined well enough
-      // This needs to be done only once, so here on the single dataReady
-      // this.$nextTick(() => {
-      //   this.$refs.greenMap.mapObject.invalidateSize(true)
-      // })
-      // setTimeout(100) {
-      //   this.$refs.greenMap.mapObject.invalidateSize(true)
-      // }
-      setTimeout(() => {
-        // console.log('-- invalidateSize')
-        this.$refs.greenMap.mapObject.invalidateSize(true)
-      }, 500)
       // Create markers "by hand" with $ref -- vue2leaflet doesn't allow
       // enough custom handling of the icons
       // Need to wait until data is ready to creat markers

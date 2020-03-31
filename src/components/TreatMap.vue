@@ -253,13 +253,12 @@ export default {
     },
     customZoom (increment) {
       // console.log(" - current zoom: " + this.$refs["greenMap"].mapObject.getZoom());
+      // console.log(' - current lat: ' + this.$refs.greenMap.mapObject.getCenter().lat)
 
-      // Need to use full setViewOffset rather than just setZoom, in
-      // order to keep the offset.
-      // Receive a 1 or -1 argument.
-      this.$refs.greenMap.mapObject.setViewOffset(L.latLng(this.entry.lat,
-        this.entry.lon), [this.offset, 0],
-      this.$refs.greenMap.mapObject.getZoom() + increment)
+      // Thought I needed to use setViewOffset rather than just setZoom, but that
+      // only worked when it was based on the chosen site. With any random location it 
+      // was too hard to figure the offset.
+      this.$refs.greenMap.mapObject.setZoom(this.$refs.greenMap.mapObject.getZoom() + increment)
     },
     latAndLng (pLat, pLng) {
       // return L.latLng(this.entry.lat -0.5, this.entry.lon - 0.5)

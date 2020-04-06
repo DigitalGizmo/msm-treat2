@@ -13,8 +13,10 @@
 
       <div>
         <p>The Journal of Joseph Treat is in the collection of the Maine State Archives. The journal and its images by Maine State Archives photographer and imaging specialist, Peter Mallow, are used here with permission.</p>
+
         <p>A published transcription and study of the journal and its historical context has been written by University of Maine historian Micah A. Pawling. Dr. Pawling&rsquo;s comprehensive work, <em>Wabanaki Homeland and the New State of Maine: The 1820 Journal and Plans of Survey of Joseph Treat,</em> is available in libraries and the Maine State Museum Store.</p>
-        <p>The Maine State Museum is grateful to Micah A. Pawling and James E. Francis, Sr. for their knowledge, guidance, and reviews during the development of this educational interactive. The Maine State Museum is also grateful to Carlson Williams. Mr. Williams lent the 1815 Greenleaf map with notations by Joseph Treat and inspired the museum&rsquo;s exploration of the 1820 journey.</p>
+
+        <p>The Maine State Museum is grateful to Micah A. Pawling and James E. Francis, Sr., Director of the Penobscot Nation Cultural and Historic Preservation Department, for their knowledge, guidance, and reviews during the development of this educational interactive. The Maine State Museum is also grateful to Carlson Williams. Mr. Williams lent the 1815 Greenleaf map with notations by Joseph Treat and inspired the museum&rsquo;s exploration of the 1820 journey.</p>
 
         <h2>Educational interactive content planning, design, and development</h2>
         <ul>
@@ -27,6 +29,8 @@
           <li><strong>Digital Gizmo</strong></li>
           <li>Don Button, Technical Director</li>
           <li>Juliet Jacobson, Design Director</li>
+          <li><strong>Blue Marble Geographics</strong></li>
+          <li>Kris Berglund, Vice-President of Sales</li>
         </ul>
       </div>
 

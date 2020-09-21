@@ -1,5 +1,14 @@
 # Treat Map Maintenance
 
+## Where things are, how to get started
+
+For startup commands see PyDjango docs Vuejs4.md
+
+```
+cd /Users/don/Sites/gizmo_dev/msm-treat2
+npm run serve
+```
+
 ##  .env configurations
 
 ### Base
